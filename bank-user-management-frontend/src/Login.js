@@ -34,7 +34,7 @@ function Login() {
                       value={customerId}
                       onChange={(e) => setCustomerId(e.target.value)}
                     />
-                    <label className="form-label" for="customer-id">
+                    <label className="form-label" htmlFor="customer-id">
                       Customer Id
                     </label>
                   </div>
@@ -48,7 +48,7 @@ function Login() {
                       value={customerPassword}
                       onChange={(e) => setCustomerPassword(e.target.value)}
                     />
-                    <label className="form-label" for="customer-password">
+                    <label className="form-label" htmlFor="customer-password">
                       Password
                     </label>
                   </div>

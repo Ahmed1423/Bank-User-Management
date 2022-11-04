@@ -1,6 +1,22 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
+function validate(customer) {
+  let isCorrect = true;
+
+  if (customer.firstName.length < 3) {
+    document.getElementById("first-name-helper").style.backgroundColor = "gold";
+    isCorrect = false;
+  }
+
+  if (customer.lastName.length < 3) {
+    document.getElementById("last-name-helper").style.backgroundColor = "gold";
+    isCorrect = false;
+  }
+
+  return isCorrect;
+}
+
 function Register() {
   let [firstName, setFirstName] = useState("");
   let [lastName, setLastName] = useState("");
@@ -21,11 +37,12 @@ function Register() {
       dob,
     };
 
-    console.log(customer);
+    if (validate(customer)) console.log(customer);
+    else console.log("Something");
   };
 
   return (
-    <div className="container py-2 h-100">
+    <div className="container py-1 h-100">
       <div className="row d-flex justify-content-center align-items-center h-100">
         <div className="col-12 col-xl-7">
           <div
@@ -33,14 +50,17 @@ function Register() {
             style={{ borderRadius: 2 + "rem" }}
           >
             <div className="card-body p-5 text-center">
-              <div className="mb-md-3 mt-md-3 pb-3">
-                <h2 className="fw-bold mb-2 text-uppercase">Register</h2>
-                <p className="text-dark-50 mb-5">Please enter your details!</p>
+              <div className="mb-md-1 mt-md-1 pb-1">
+                <h2 className="fw-bold text-uppercase">Register</h2>
+                <p className="text-dark-50 mb-3">Please enter your details!</p>
                 <form onSubmit={handleSubmit}>
                   <div className="row">
                     <div className="col-6">
                       <div className="form-outline mb-2">
-                        <label className="form-label" for="customer-first-name">
+                        <label
+                          className="form-label"
+                          htmlFor="customer-first-name"
+                        >
                           First Name
                         </label>
                         <input
@@ -52,12 +72,21 @@ function Register() {
                           onChange={(e) => setFirstName(e.target.value)}
                           required
                         />
+                        <small
+                          className="form-text text-muted"
+                          id="first-name-helper"
+                        >
+                          First Name should be atleast 3 characters
+                        </small>
                       </div>
                     </div>
 
                     <div className="col-6">
                       <div className="form-outline mb-2">
-                        <label className="form-label" for="customer-last-name">
+                        <label
+                          className="form-label"
+                          htmlFor="customer-last-name"
+                        >
                           Last Name
                         </label>
                         <input
@@ -69,6 +98,12 @@ function Register() {
                           onChange={(e) => setLastName(e.target.value)}
                           required
                         />
+                        <small
+                          className="form-text text-muted"
+                          id="last-name-helper"
+                        >
+                          Last Name should be atleast 3 characters
+                        </small>
                       </div>
                     </div>
                   </div>
@@ -76,7 +111,7 @@ function Register() {
                   <div className="row">
                     <div className="col-6">
                       <div className="form-outline mb-2">
-                        <label className="form-label" for="customer-city">
+                        <label className="form-label" htmlFor="customer-city">
                           City
                         </label>
                         <input
@@ -92,7 +127,10 @@ function Register() {
                     </div>
                     <div className="col-6">
                       <div className="form-outline mb-2">
-                        <label className="form-label" for="customer-contact">
+                        <label
+                          className="form-label"
+                          htmlFor="customer-contact"
+                        >
                           Contact Number
                         </label>
                         <input
@@ -104,6 +142,9 @@ function Register() {
                           onChange={(e) => setPhone(e.target.value)}
                           required
                         />
+                        <small className="form-text text-muted">
+                          Phone Number should have exactly 10 digits
+                        </small>
                       </div>
                     </div>
                   </div>
@@ -111,7 +152,10 @@ function Register() {
                   <div className="row mb-5">
                     <div className="col-6">
                       <div className="form-outline">
-                        <label className="form-label" for="customer-occupation">
+                        <label
+                          className="form-label"
+                          htmlFor="customer-occupation"
+                        >
                           Occupation
                         </label>
                         <input
@@ -128,7 +172,7 @@ function Register() {
 
                     <div className="col-6">
                       <div className="form-outline">
-                        <label className="form-label" for="customer-dob">
+                        <label className="form-label" htmlFor="customer-dob">
                           date of Birth
                         </label>
                         <input
@@ -137,9 +181,15 @@ function Register() {
                           className="form-control form-control-lg"
                           name="customer-dob"
                           value={dob}
+                          min="1995-01-01"
+                          max={new Date().toLocaleDateString("en-ca")}
                           onChange={(e) => setDob(e.target.value)}
                           required
                         />
+                        <small className="form-text text-muted">
+                          {" "}
+                          Date of Birth should not exceed today's date
+                        </small>
                       </div>
                     </div>
                   </div>
