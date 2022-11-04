@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function Login() {
   let [customerId, setCustomerId] = useState("");
@@ -27,13 +28,13 @@ function Login() {
                   <div className="form-outline mb-4">
                     <input
                       type="text"
-                      id="customerId"
+                      id="customer-id"
                       className="form-control form-control-lg"
-                      name="customerId"
+                      name="customer-id"
                       value={customerId}
                       onChange={(e) => setCustomerId(e.target.value)}
                     />
-                    <label className="form-label" for="customerId">
+                    <label className="form-label" for="customer-id">
                       Customer Id
                     </label>
                   </div>
@@ -41,13 +42,13 @@ function Login() {
                   <div className="form-outline mb-4">
                     <input
                       type="password"
-                      id="customerPassword"
+                      id="customer-password"
                       className="form-control form-control-lg"
-                      name="customerPassword"
+                      name="customer-password"
                       value={customerPassword}
                       onChange={(e) => setCustomerPassword(e.target.value)}
                     />
-                    <label className="form-label" for="customerPassword">
+                    <label className="form-label" for="customer-password">
                       Password
                     </label>
                   </div>
@@ -62,7 +63,9 @@ function Login() {
 
               <div className="d-grid gap-2">
                 <p className="text-center">Don't have an account?</p>
-                <button className="btn btn-success">Register With Us!</button>
+                <Link to="/register" className="btn btn-success">
+                  Register With Us!
+                </Link>
               </div>
             </div>
           </div>
