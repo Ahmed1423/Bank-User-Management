@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function Register() {
   let [firstName, setFirstName] = useState("");
@@ -49,6 +50,7 @@ function Register() {
                           name="customer-first-name"
                           value={firstName}
                           onChange={(e) => setFirstName(e.target.value)}
+                          required
                         />
                       </div>
                     </div>
@@ -65,6 +67,7 @@ function Register() {
                           name="customer-last-name"
                           value={lastName}
                           onChange={(e) => setLastName(e.target.value)}
+                          required
                         />
                       </div>
                     </div>
@@ -83,6 +86,7 @@ function Register() {
                           name="customer-city"
                           value={city}
                           onChange={(e) => setCity(e.target.value)}
+                          required
                         />
                       </div>
                     </div>
@@ -98,6 +102,7 @@ function Register() {
                           name="customer-contact"
                           value={phone}
                           onChange={(e) => setPhone(e.target.value)}
+                          required
                         />
                       </div>
                     </div>
@@ -116,6 +121,7 @@ function Register() {
                           name="customer-occupation"
                           value={occupation}
                           onChange={(e) => setOccupation(e.target.value)}
+                          required
                         />
                       </div>
                     </div>
@@ -132,6 +138,7 @@ function Register() {
                           name="customer-dob"
                           value={dob}
                           onChange={(e) => setDob(e.target.value)}
+                          required
                         />
                       </div>
                     </div>
@@ -147,7 +154,9 @@ function Register() {
 
               <div className="d-grid gap-2">
                 <p className="text-center">Already have an account?</p>
-                <button className="btn btn-success">Login Here!</button>
+                <Link to="/login" className="btn btn-success">
+                  Login Here!
+                </Link>
               </div>
             </div>
           </div>
