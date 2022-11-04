@@ -34,5 +34,62 @@ public class CustomerMaster {
     private Date customerDateOdBirth;
 	@OneToMany(mappedBy = "customerMaster", cascade = CascadeType.ALL)
 	private List<AccountMaster> accountMaster = new ArrayList<>();
+	public Long getCustomer_number() {
+		return customer_number;
+	}
+	public void setCustomer_number(Long customer_number) {
+		this.customer_number = customer_number;
+	}
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	public String getMiddleName() {
+		return middleName;
+	}
+	public void setMiddleName(String middleName) {
+		this.middleName = middleName;
+	}
+	public String getCustomerCity() {
+		return customerCity;
+	}
+	public void setCustomerCity(String customerCity) {
+		this.customerCity = customerCity;
+	}
+	public String getCustomerContactNo() {
+		return customerContactNo;
+	}
+	public void setCustomerContactNo(String customerContactNo) {
+		this.customerContactNo = customerContactNo;
+	}
+	public String getOccupation() {
+		return occupation;
+	}
+	public void setOccupation(String occupation) {
+		this.occupation = occupation;
+	}
+	public Date getCustomerDateOdBirth() {
+		return customerDateOdBirth;
+	}
+	public void setCustomerDateOdBirth(Date customerDateOdBirth) {
+		this.customerDateOdBirth = customerDateOdBirth;
+	}
+	public List<AccountMaster> getAccountMaster() {
+		return accountMaster;
+	}
+	public void setAccountMaster(List<AccountMaster> accountMaster) {
+		this.accountMaster = accountMaster;
+	}
 
+	public CustomerMaster() {
+		
+	}
 }

@@ -36,7 +36,65 @@ public class AccountMaster {
 	 
 	 @OneToMany(mappedBy = "accountMaster", cascade = CascadeType.ALL)
 	    private List<TransactionDetails> transactionDetails = new ArrayList<>();
+
+	public String getAccount_number() {
+		return account_number;
+	}
+
+	public void setAccount_number(String account_number) {
+		this.account_number = account_number;
+	}
+
+	public String getAccountType() {
+		return accountType;
+	}
+
+	public void setAccountType(String accountType) {
+		this.accountType = accountType;
+	}
+
+	public String getAccountStatus() {
+		return accountStatus;
+	}
+
+	public void setAccountStatus(String accountStatus) {
+		this.accountStatus = accountStatus;
+	}
+
+	public CustomerMaster getCustomerMaster() {
+		return customerMaster;
+	}
+
+	public void setCustomerMaster(CustomerMaster customerMaster) {
+		this.customerMaster = customerMaster;
+	}
+
+	public BranchMaster getBranchMaster() {
+		return branchMaster;
+	}
+
+	public void setBranchMaster(BranchMaster branchMaster) {
+		this.branchMaster = branchMaster;
+	}
+
+	public Date getAccountOpeningDate() {
+		return accountOpeningDate;
+	}
+
+	public void setAccountOpeningDate(Date accountOpeningDate) {
+		this.accountOpeningDate = accountOpeningDate;
+	}
+
+	public List<TransactionDetails> getTransactionDetails() {
+		return transactionDetails;
+	}
+
+	public void setTransactionDetails(List<TransactionDetails> transactionDetails) {
+		this.transactionDetails = transactionDetails;
+	}
 		
-	
+	public AccountMaster() {
+		
+	}
 
 }

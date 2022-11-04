@@ -30,6 +30,56 @@ public class TransactionDetails {
 	 @ManyToOne
 	    @JoinColumn(name ="account_number", nullable = false)
 	    private AccountMaster accountMaster;
-	
 
+	public String getTransaction_number() {
+		return transaction_number;
+	}
+
+	public void setTransaction_number(String transaction_number) {
+		this.transaction_number = transaction_number;
+	}
+
+	public String getMediumOftranscation() {
+		return mediumOftranscation;
+	}
+
+	public void setMediumOftranscation(String mediumOftranscation) {
+		this.mediumOftranscation = mediumOftranscation;
+	}
+
+	public String getTranscation_type() {
+		return transcation_type;
+	}
+
+	public void setTranscation_type(String transcation_type) {
+		this.transcation_type = transcation_type;
+	}
+
+	public int getTransactionAmount() {
+		return transactionAmount;
+	}
+
+	public void setTransactionAmount(int transactionAmount) {
+		this.transactionAmount = transactionAmount;
+	}
+
+	public Date getDateOfTransaction() {
+		return dateOfTransaction;
+	}
+
+	public void setDateOfTransaction(Date dateOfTransaction) {
+		this.dateOfTransaction = dateOfTransaction;
+	}
+
+	public AccountMaster getAccountMaster() {
+		return accountMaster;
+	}
+
+	public void setAccountMaster(AccountMaster accountMaster) {
+		this.accountMaster = accountMaster;
+	}
+	
+	public TransactionDetails() {
+		
+	}
 }

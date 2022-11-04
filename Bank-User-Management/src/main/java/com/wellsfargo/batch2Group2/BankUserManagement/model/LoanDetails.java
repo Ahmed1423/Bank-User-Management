@@ -27,4 +27,31 @@ public class LoanDetails {
 	    @JoinColumn(name ="branch_id", nullable = false)
 	    private BranchMaster branchMaster;
 	    // getters and setters
+		public Long getId() {
+			return id;
+		}
+		public void setId(Long id) {
+			this.id = id;
+		}
+		public String getBranchCity() {
+			return branchCity;
+		}
+		public void setBranchCity(String branchCity) {
+			this.branchCity = branchCity;
+		}
+		public CustomerMaster getCustomerMaster() {
+			return customerMaster;
+		}
+		public void setCustomerMaster(CustomerMaster customerMaster) {
+			this.customerMaster = customerMaster;
+		}
+		public BranchMaster getBranchMaster() {
+			return branchMaster;
+		}
+		public void setBranchMaster(BranchMaster branchMaster) {
+			this.branchMaster = branchMaster;
+		}
+		public LoanDetails() {
+			
+		}
 }
