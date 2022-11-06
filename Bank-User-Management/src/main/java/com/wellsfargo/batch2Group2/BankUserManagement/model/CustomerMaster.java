@@ -14,31 +14,41 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "customer_master")
 public class CustomerMaster {
-	
+
 	@Id
-	private Long customer_number;
-	
+	@Column(name="customer_number")
+	private Long customerNumber;
+
 	@Column(name="firstname",nullable = false, length = 30)
-    private String firstName;
+	private String firstName;
 	@Column(name="lastname",nullable = false, length = 30)
-    private String lastName;
-	@Column(name="middlename",nullable = false, length = 30)
-    private String middleName;
+	private String lastName;
 	@Column(name="customer_city",nullable = false, length = 15)
-    private String customerCity;
+	private String customerCity;
 	@Column(name="customer_contact_no",nullable = false, length = 10)
-    private String customerContactNo;
-	@Column(name="occupation",nullable = false, length = 20)
-    private String occupation;
+	private String customerContactNo;
+	@Column(name="occupation",nullable = false, length = 20, unique=true)
+	private String occupation;
 	@Column(name="customer_date_of_birth",nullable = false)
-    private Date customerDateOdBirth;
+	private Date customerDateOdBirth;
+	private String customerPassword;
+
+
+	public String getCustomerPassword() {
+		return customerPassword;
+	}
+	public void setCustomerPassword(String customerPassword) {
+		this.customerPassword = customerPassword;
+	}
+
 	@OneToMany(mappedBy = "customerMaster", cascade = CascadeType.ALL)
 	private List<AccountMaster> accountMaster = new ArrayList<>();
-	public Long getCustomer_number() {
-		return customer_number;
+
+	public Long getCustomerNumber() {
+		return customerNumber;
 	}
-	public void setCustomer_number(Long customer_number) {
-		this.customer_number = customer_number;
+	public void setCustomerNumber(Long customerNumber) {
+		this.customerNumber = customerNumber;
 	}
 	public String getFirstName() {
 		return firstName;
@@ -51,12 +61,6 @@ public class CustomerMaster {
 	}
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
-	}
-	public String getMiddleName() {
-		return middleName;
-	}
-	public void setMiddleName(String middleName) {
-		this.middleName = middleName;
 	}
 	public String getCustomerCity() {
 		return customerCity;
@@ -90,6 +94,19 @@ public class CustomerMaster {
 	}
 
 	public CustomerMaster() {
-		
+
 	}
+	public CustomerMaster(Long customerNumber, String firstName, String lastName, String customerCity,
+						  String customerContactNo, String occupation, Date customerDateOdBirth, String customerPassword) {
+		super();
+		this.customerNumber = customerNumber;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.customerCity = customerCity;
+		this.customerContactNo = customerContactNo;
+		this.occupation = occupation;
+		this.customerDateOdBirth = customerDateOdBirth;
+		this.customerPassword = customerPassword;
+	}
+
 }

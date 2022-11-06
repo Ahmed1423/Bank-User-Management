@@ -1,6 +1,6 @@
 package com.wellsfargo.batch2Group2.BankUserManagement.model;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,33 +16,43 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "account_master")
 public class AccountMaster {
-	
-	@Id
-    private String account_number;
-	
-	@Column(name="account_type",nullable = false, length = 30)
-    private String accountType;
-	@Column(name="account_status",nullable = false, length = 30)
-    private String accountStatus;
-	
-	 @ManyToOne
-	    @JoinColumn(name ="customer_number", nullable = false)
-	    private CustomerMaster customerMaster;
-	 @ManyToOne
-	    @JoinColumn(name ="branch_id", nullable = false)
-	    private BranchMaster branchMaster;
-	 @Column(name="account_opening_date",nullable = false)
-	    private Date accountOpeningDate;
-	 
-	 @OneToMany(mappedBy = "accountMaster", cascade = CascadeType.ALL)
-	    private List<TransactionDetails> transactionDetails = new ArrayList<>();
 
-	public String getAccount_number() {
-		return account_number;
+	public AccountMaster(String accountNumber, String accountType, String accountStatus,
+						 LocalDate accountOpeningDate) {
+		super();
+		this.accountNumber = accountNumber;
+		this.accountType = accountType;
+		this.accountStatus = accountStatus;
+		this.accountOpeningDate = accountOpeningDate;
 	}
 
-	public void setAccount_number(String account_number) {
-		this.account_number = account_number;
+	@Id
+	@Column(name="account_number")
+	private String accountNumber;
+
+	@Column(name="account_type",nullable = false, length = 30)
+	private String accountType;
+	@Column(name="account_status",nullable = false, length = 30)
+	private String accountStatus;
+
+	@ManyToOne
+	@JoinColumn(name ="customer_number", nullable = false)
+	private CustomerMaster customerMaster;
+	@ManyToOne
+	@JoinColumn(name ="branch_id", nullable = false)
+	private BranchMaster branchMaster;
+	@Column(name="account_opening_date",nullable = false)
+	private LocalDate accountOpeningDate;
+
+	@OneToMany(mappedBy = "accountMaster", cascade = CascadeType.ALL)
+	private List<TransactionDetails> transactionDetails = new ArrayList<>();
+
+	public String getAccountNumber() {
+		return accountNumber;
+	}
+
+	public void setAccountNumber(String accountNumber) {
+		this.accountNumber = accountNumber;
 	}
 
 	public String getAccountType() {
@@ -77,12 +87,12 @@ public class AccountMaster {
 		this.branchMaster = branchMaster;
 	}
 
-	public Date getAccountOpeningDate() {
+	public LocalDate getAccountOpeningDate() {
 		return accountOpeningDate;
 	}
 
-	public void setAccountOpeningDate(Date accountOpeningDate) {
-		this.accountOpeningDate = accountOpeningDate;
+	public void setAccountOpeningDate(LocalDate localDate) {
+		this.accountOpeningDate = localDate;
 	}
 
 	public List<TransactionDetails> getTransactionDetails() {
@@ -92,9 +102,9 @@ public class AccountMaster {
 	public void setTransactionDetails(List<TransactionDetails> transactionDetails) {
 		this.transactionDetails = transactionDetails;
 	}
-		
+
 	public AccountMaster() {
-		
+
 	}
 
 }
