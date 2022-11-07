@@ -1,10 +1,16 @@
 import React from "react";
+import GoToLogin from './GoToLogin';
 
 const handleSubmit = () => {
 
 };
 
-const Loan = () => {
+const Loan = (props) => {
+
+  if(sessionStorage.getItem('user') === null) {
+    return (<GoToLogin />);
+  }
+
     return <>
         <div className="mb-md-1 mt-md-1 pb-1">
                 <h2 className="fw-bold text-uppercase">Loan</h2>
@@ -21,7 +27,7 @@ const Loan = () => {
                         </label>
                         <input
                           type="text"
-                          value="CID"
+                          value={sessionStorage.getItem('user')}
                           disabled
                         />
                       </div>
