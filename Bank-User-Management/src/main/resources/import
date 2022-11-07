@@ -1,3 +1,0 @@
-INSERT INTO branch_master VALUES(1, "HyderabadBankOfIndia", "Hyderabad");
-INSERT INTO branch_master VALUES(2, "BanagloreBankOfIndia", "Bangalore");
-INSERT INTO branch_master VALUES(3, "ChennaiBankOfIndia", "Chennai");

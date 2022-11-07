@@ -20,7 +20,7 @@ public class CustomerController {
     AccountService accService;
 
     @PostMapping("/register")
-    public String createAccount(@RequestBody CustomerMaster customer) {
+    public String createAccount(@RequestBody CustomerMaster customer){
         return custService.registerAccount(customer);
     }
 
@@ -30,6 +30,7 @@ public class CustomerController {
         String id = details.substring(1, details.length() - 1).split(",")[0].split(":")[1].trim();
         String password = details.substring(1, details.length() - 1).split(",")[1].split(":")[1];
 
+        password = password.substring(1, password.length() - 2).trim();
         return custService.isLoginDetailsCorrect(Long.parseLong(id), password);
     }
 }
