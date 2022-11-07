@@ -1,2 +1,2 @@
-const branches = [...Array(10).keys()].map(x => "Branch" + x);
+const branches = ["Hyderabad", "Bangalore", "Chennai"];
 export {branches};
