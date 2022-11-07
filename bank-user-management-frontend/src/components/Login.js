@@ -1,13 +1,30 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import * as utils from '../services/requests';
 
 function Login() {
+
+  const navigate = useNavigate();
+
+  const route_ = (path) => {
+      navigate(path);
+  }
+
   let [customerId, setCustomerId] = useState("");
   let [customerPassword, setCustomerPassword] = useState("");
 
   let handleSubmit = (e) => {
     e.preventDefault();
+    utils.post("/login", {"customerId": customerId, "customerPassword": customerPassword})
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((err) => {
+      console.log(err.response.status);
+    })
+    sessionStorage.setItem('user', customerId);
     console.log(customerId + " " + customerPassword);
+    route_("/menu");
   };
 
   return (

@@ -1,10 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
+import GoToLogin from './GoToLogin';
+import * as constants from '../services/constants';
 
-const handleSubmit = () => {
+const Loan = (props) => {
 
-};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(branch + " " + amount);
+  };
 
-const Loan = () => {
+  const [branch, setBranch] = useState('');
+  const [amount, setAmount] = useState(0);
+
+  if(sessionStorage.getItem('user') === null) {
+    return (<GoToLogin />);
+  }
+
     return <>
         <div className="mb-md-1 mt-md-1 pb-1">
                 <h2 className="fw-bold text-uppercase">Loan</h2>
@@ -21,7 +32,7 @@ const Loan = () => {
                         </label>
                         <input
                           type="text"
-                          value="CID"
+                          value={sessionStorage.getItem('user')}
                           disabled
                         />
                       </div>
@@ -30,27 +41,27 @@ const Loan = () => {
                       <div className="form-outline mb-2">
                         <label
                           className="form-label"
-                          htmlFor="customer-first-name"
                         >
                           Branch 
                         </label>
-                        <input
-                          type="text"
-                          value="CID"
-                          required
-                        />
+                        <div>
+                          <select onChange={(e) => {setBranch(e.target.value)}}>
+                            {constants.branches.map(branch => <option key={branch} value={branch}>{branch}</option>)}
+                          </select>
+                        </div>
                       </div>
                     </div>
                     <div className="col-6">
                       <div className="form-outline mb-2">
                         <label
                           className="form-label"
-                          htmlFor="customer-first-name"
                         >
                           Enter the Loan Amount 
                         </label>
                         <input
                           type="number"
+                          value={amount}
+                          onChange={(e) => {setAmount(e.target.value)}}
                           required
                         />
                       </div>

@@ -1,10 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
+import GoToLogin from "./GoToLogin";
 
-const handleSubmit = () => {
+const ViewStatement = (props) => {
 
-};
+  const handleSubmit = (e) => {
+      e.preventDefault();
+      console.log(transaction + " " + fromDate + " " + toDate);
+  };
 
-const ViewStatement = () => {
+  const [transaction, setTransaction] = useState('Withdraw');
+  const [fromDate, setFromDate] = useState();
+  const [toDate, setToDate] = useState();
+
+  if(sessionStorage.getItem('user') === null) {
+    return (<GoToLogin />);
+  }
+
     return (
     <>
         <div className="mb-md-1 mt-md-1 pb-1">
@@ -16,13 +27,12 @@ const ViewStatement = () => {
                       <div className="form-outline mb-2">
                         <label
                           className="form-label"
-                          htmlFor="customer-first-name"
                         >
                           Customer ID 
                         </label>
                         <input
                           type="text"
-                          value="CID"
+                          value={sessionStorage.getItem('user')}
                           disabled
                         />
                       </div>
@@ -31,14 +41,15 @@ const ViewStatement = () => {
                       <div className="form-outline mb-2">
                         <label
                           className="form-label"
-                          htmlFor="customer-first-name"
                         >
                           Select the Transaction
                         </label>
-                        <input
-                          type="text"
-                          required
-                        />
+                        <div>
+                          <select onChange={(e) => {setTransaction(e.target.value)}}>
+                            <option value="Withdraw">Withdraw</option>
+                            <option value="Deposit">Deposit</option>
+                          </select>
+                        </div>
                       </div>
                     </div>
                     
@@ -49,10 +60,9 @@ const ViewStatement = () => {
                         </label>
                         <input
                           type="date"
-                          id="customer-dob"
                           className="form-control form-control-lg"
-                          name="customer-dob"
-                          min="1995-01-01"
+                          value={fromDate}
+                          onChange={(e) => setFromDate(e.target.value)}
                           max={new Date().toLocaleDateString("en-ca")}
                           required
                         />
@@ -66,10 +76,9 @@ const ViewStatement = () => {
                         </label>
                         <input
                           type="date"
-                          id="customer-dob"
                           className="form-control form-control-lg"
-                          name="customer-dob"
-                          min="1995-01-01"
+                          value={toDate}
+                          onChange={(e) => setToDate(e.target.value)}
                           max={new Date().toLocaleDateString("en-ca")}
                           required
                         />

@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
+import GoToLogin from "./GoToLogin";
 
-const handleSubmit = () => {
+const Transactions = (props) => {
+  
+  const [transaction, setTransaction] = useState('Withdraw');
+  const [amount, setAmount] = useState(0);
 
-};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(transaction + " " + amount);
+  }
 
-const Transactions = () => {
+  if(sessionStorage.getItem('user') === null) {
+    return (<GoToLogin />);
+  }
+
     return <>
         <div className="mb-md-1 mt-md-1 pb-1">
                 <h2 className="fw-bold text-uppercase">Transactions</h2>
@@ -15,13 +25,12 @@ const Transactions = () => {
                       <div className="form-outline mb-2">
                         <label
                           className="form-label"
-                          htmlFor="customer-first-name"
                         >
                           Customer ID 
                         </label>
                         <input
                           type="text"
-                          value="CID"
+                          value={sessionStorage.getItem('user')}
                           disabled
                         />
                       </div>
@@ -30,14 +39,15 @@ const Transactions = () => {
                       <div className="form-outline mb-2">
                         <label
                           className="form-label"
-                          htmlFor="customer-first-name"
                         >
                           Select the Transaction
                         </label>
-                        <input
-                          type="text"
-                          required
-                        />
+                        <div>
+                          <select onChange={(e) => {setTransaction(e.target.value)}}>
+                            <option value="Withdraw">Withdraw</option>
+                            <option value="Deposit">Deposit</option>
+                          </select>
+                        </div>
                       </div>
                     </div>
                     <div className="col-6">
@@ -50,6 +60,8 @@ const Transactions = () => {
                         </label>
                         <input
                           type="number"
+                          value={amount}
+                          onChange={(e) => {setAmount(e.target.value)}}
                           required
                         />
                       </div>

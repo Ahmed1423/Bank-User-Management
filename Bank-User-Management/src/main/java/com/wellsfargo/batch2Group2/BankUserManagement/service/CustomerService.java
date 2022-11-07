@@ -30,20 +30,19 @@ public class CustomerService implements ICustomerService {
     LoanRepository loanRepo;
 
     @Override
-    public String registerAccount(CustomerMaster customer) {
+    public String registerAccount(CustomerMaster customer){
         // TODO Auto-generated method stub
         if(userAccountExists(customer.getCustomerNumber())) {
             return "Customer Already Exists";
         }
+
         custRepo.save(customer);
-
         AccountMaster ac = new AccountMaster();
-
         ac.setAccountOpeningDate(LocalDate.of(2022, Month.NOVEMBER, 05));
         ac.setAccountStatus("OPEN");
         ac.setCustomerMaster(customer);
         ac.setAccountType("Savings");
-
+        ac.setBalance(0);
         if(customer.getCustomerCity().equals("Hyderabad")) {
             ac.setAccountNumber(customer.getCustomerNumber().toString() + "1");
             ac.setBranchMaster(br.getReferenceById(1L));
@@ -54,19 +53,31 @@ public class CustomerService implements ICustomerService {
             ac.setAccountNumber(customer.getCustomerNumber().toString() + "3");
             ac.setBranchMaster(br.getReferenceById(3L));
         }
-
         accService.createAccount(ac);
         return "Successful";
     }
 
-    @Override
     public Boolean userAccountExists(Long customerId) {
         // TODO Auto-generated method stub
+        return custRepo.existsById(customerId);
+    }
+
+    @Override
+    public String isLoginDetailsCorrect(Long customerId, String password) {
+        // TODO Auto-generated method stub
         Optional <CustomerMaster> customer = custRepo.findById(customerId);
-        if(customer.isEmpty()) {
-            return false;
+//		
+        if(customer.isEmpty()) return "Account Does not Exist";
+        else {
+            password = password.substring(1, password.length() - 1);
+            CustomerMaster cust = custRepo.getReferenceById(customerId);
+            if(cust.getCustomerPassword().equals(password)) {
+                return "Login Details Correct";
+            } else {
+                System.out.println(cust.getCustomerPassword() + " " + password);
+                return "Login Details incorrect";
+            }
         }
-        return true;
     }
     
     @Override

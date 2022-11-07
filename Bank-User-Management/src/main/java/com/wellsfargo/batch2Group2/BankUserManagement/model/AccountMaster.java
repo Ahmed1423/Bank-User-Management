@@ -17,10 +17,11 @@ import javax.persistence.Table;
 @Table(name = "account_master")
 public class AccountMaster {
 
-	public AccountMaster(String accountNumber, String accountType, String accountStatus,
+	public AccountMaster(String accountNumber, int balance, String accountType, String accountStatus,
 						 LocalDate accountOpeningDate) {
 		super();
 		this.accountNumber = accountNumber;
+		this.balance = balance;
 		this.accountType = accountType;
 		this.accountStatus = accountStatus;
 		this.accountOpeningDate = accountOpeningDate;
@@ -29,9 +30,13 @@ public class AccountMaster {
 	@Id
 	@Column(name="account_number")
 	private String accountNumber;
+	
+	@Column(name="balance")
+	private int balance;
 
 	@Column(name="account_type",nullable = false, length = 30)
 	private String accountType;
+
 	@Column(name="account_status",nullable = false, length = 30)
 	private String accountStatus;
 	
@@ -41,14 +46,18 @@ public class AccountMaster {
 	@ManyToOne
 	@JoinColumn(name ="customer_number", nullable = false)
 	private CustomerMaster customerMaster;
+	
 	@ManyToOne
 	@JoinColumn(name ="branch_id", nullable = false)
+	
 	private BranchMaster branchMaster;
 	@Column(name="account_opening_date",nullable = false)
+	
 	private LocalDate accountOpeningDate;
 
 	@OneToMany(mappedBy = "accountMaster", cascade = CascadeType.ALL)
 	private List<TransactionDetails> transactionDetails = new ArrayList<>();
+	
 
 	public String getAccountNumber() {
 		return accountNumber;
@@ -104,6 +113,14 @@ public class AccountMaster {
 
 	public void setTransactionDetails(List<TransactionDetails> transactionDetails) {
 		this.transactionDetails = transactionDetails;
+	}
+
+	public int getBalance() {
+		return this.balance;
+	}
+
+	public void setBalance(int balance) {
+		this.balance = balance;
 	}
 
 	public AccountMaster() {
