@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import * as utils from '../services/requests';
 
 function Login() {
 
@@ -14,6 +15,13 @@ function Login() {
 
   let handleSubmit = (e) => {
     e.preventDefault();
+    utils.post("/login", {"customerId": customerId, "customerPassword": customerPassword})
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((err) => {
+      console.log(err.response.status);
+    })
     sessionStorage.setItem('user', customerId);
     console.log(customerId + " " + customerPassword);
     route_("/menu");
