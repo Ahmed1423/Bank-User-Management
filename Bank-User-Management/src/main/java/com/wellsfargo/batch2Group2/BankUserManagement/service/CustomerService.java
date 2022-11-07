@@ -12,6 +12,7 @@ import com.wellsfargo.batch2Group2.BankUserManagement.dao.BranchRepository;
 import com.wellsfargo.batch2Group2.BankUserManagement.dao.CustomerRepository;
 import com.wellsfargo.batch2Group2.BankUserManagement.dao.LoanRepository;
 import com.wellsfargo.batch2Group2.BankUserManagement.model.AccountMaster;
+import com.wellsfargo.batch2Group2.BankUserManagement.model.BranchMaster;
 import com.wellsfargo.batch2Group2.BankUserManagement.model.CustomerMaster;
 import com.wellsfargo.batch2Group2.BankUserManagement.model.LoanDetails;
 
@@ -45,13 +46,13 @@ public class CustomerService implements ICustomerService {
         ac.setBalance(0);
         if(customer.getCustomerCity().equals("Hyderabad")) {
             ac.setAccountNumber(customer.getCustomerNumber().toString() + "1");
-            ac.setBranchMaster(br.getReferenceById(1L));
+            ac.setBranchMaster(br.getReferenceById("1"));
         } else if(customer.getCustomerCity().equals("Bangalore")) {
             ac.setAccountNumber(customer.getCustomerNumber().toString() + "2");
-            ac.setBranchMaster(br.getReferenceById(2L));
+            ac.setBranchMaster(br.getReferenceById("2"));
         } else {
             ac.setAccountNumber(customer.getCustomerNumber().toString() + "3");
-            ac.setBranchMaster(br.getReferenceById(3L));
+            ac.setBranchMaster(br.getReferenceById("3"));
         }
         accService.createAccount(ac);
         return "Successful";
@@ -82,10 +83,14 @@ public class CustomerService implements ICustomerService {
     
     @Override
     public String applyLoan(LoanDetails loanDetails) {
-    	if(!userAccountExists(loanDetails.getCustomerMaster().getCustomerNumber())) {
+    	System.out.println(loanDetails.toString());
+    	if(!userAccountExists(loanDetails.getCustomerNumber())) {
             return "INVALID CUSTOMER ID";
         }
-        
+    	CustomerMaster cust = custRepo.getReferenceById(loanDetails.getCustomerNumber());
+    	BranchMaster br1 = br.getReferenceById(loanDetails.getBranchId());
+    	loanDetails.setBranchMaster(br1);
+    	loanDetails.setCustomerMaster(cust);
     	loanRepo.save(loanDetails);
     	return "Successful";
     }

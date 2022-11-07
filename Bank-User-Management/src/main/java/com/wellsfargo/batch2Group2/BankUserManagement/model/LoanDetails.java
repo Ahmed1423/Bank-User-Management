@@ -26,6 +26,12 @@ public class LoanDetails {
 	    @Column(name="loan_amount",nullable = false, length = 7)
 	    private int loanAmount;
 	    
+	    @Column(name="C_ID",nullable = false)
+	    private String customerNumber;
+	    
+	    @Column(name="B_ID",nullable = false, length = 7)
+	    private String branchId;
+	    
 	    // getters and setters
 		public Long getId() {
 			return id;
@@ -55,4 +61,24 @@ public class LoanDetails {
 		public LoanDetails() {
 			
 		}
+		public String getCustomerNumber() {
+			return customerNumber;
+		}
+		public void setCustomerNumber(String customerNumber) {
+			this.customerNumber = customerNumber;
+		}
+		public String getBranchId() {
+			return branchId;
+		}
+		public void setBranchId(String branchId) {
+			this.branchId = branchId;
+		}
+		@Override
+		public String toString() {
+			return "LoanDetails [id=" + id + ", customerMaster=" + customerMaster + ", branchMaster=" + branchMaster
+					+ ", loanAmount=" + loanAmount + ", customerNumber=" + customerNumber + ", branchId=" + branchId
+					+ "]";
+		}
+		
+		
 }
