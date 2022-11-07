@@ -10,8 +10,10 @@ import org.springframework.stereotype.Service;
 import com.wellsfargo.batch2Group2.BankUserManagement.dao.AccountRepository;
 import com.wellsfargo.batch2Group2.BankUserManagement.dao.BranchRepository;
 import com.wellsfargo.batch2Group2.BankUserManagement.dao.CustomerRepository;
+import com.wellsfargo.batch2Group2.BankUserManagement.dao.LoanRepository;
 import com.wellsfargo.batch2Group2.BankUserManagement.model.AccountMaster;
 import com.wellsfargo.batch2Group2.BankUserManagement.model.CustomerMaster;
+import com.wellsfargo.batch2Group2.BankUserManagement.model.LoanDetails;
 
 @Service
 public class CustomerService implements ICustomerService {
@@ -24,6 +26,8 @@ public class CustomerService implements ICustomerService {
     BranchRepository br;
     @Autowired
     AccountService accService;
+    @Autowired
+    LoanRepository loanRepo;
 
     @Override
     public String registerAccount(CustomerMaster customer) {
@@ -63,5 +67,14 @@ public class CustomerService implements ICustomerService {
             return false;
         }
         return true;
+    }
+    
+    @Override
+    public String applyLoan(LoanDetails loanDetails) {
+    	if(!userAccountExists(loanDetails.getCustomerMaster().getCustomerNumber())) {
+            return "INVALID CUSTOMER ID";
+        }
+    	loanRepo.save(loanDetails);
+    	return "Successful";
     }
 }

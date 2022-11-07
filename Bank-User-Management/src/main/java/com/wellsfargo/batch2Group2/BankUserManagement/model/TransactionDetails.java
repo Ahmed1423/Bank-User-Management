@@ -20,7 +20,7 @@ public class TransactionDetails {
     private String mediumOftranscation;
 	
 	@Column(name="transaction_type",nullable = false, length = 30)
-    private String transcation_type;
+    private String transcationType;
 	
 	@Column(name="transaction_amount",nullable = false, length = 7)
     private int transactionAmount;
@@ -48,11 +48,11 @@ public class TransactionDetails {
 	}
 
 	public String getTranscation_type() {
-		return transcation_type;
+		return transcationType;
 	}
 
 	public void setTranscation_type(String transcation_type) {
-		this.transcation_type = transcation_type;
+		this.transcationType = transcation_type;
 	}
 
 	public int getTransactionAmount() {
