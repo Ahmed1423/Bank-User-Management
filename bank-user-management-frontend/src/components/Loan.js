@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import GoToLogin from './GoToLogin';
-
-const handleSubmit = () => {
-
-};
+import * as constants from '../services/constants';
 
 const Loan = (props) => {
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(branch + " " + amount);
+  };
+
+  const [branch, setBranch] = useState('');
+  const [amount, setAmount] = useState(0);
 
   if(sessionStorage.getItem('user') === null) {
     return (<GoToLogin />);
@@ -36,27 +41,27 @@ const Loan = (props) => {
                       <div className="form-outline mb-2">
                         <label
                           className="form-label"
-                          htmlFor="customer-first-name"
                         >
                           Branch 
                         </label>
-                        <input
-                          type="text"
-                          value="CID"
-                          required
-                        />
+                        <div>
+                          <select onChange={(e) => {setBranch(e.target.value)}}>
+                            {constants.branches.map(branch => <option key={branch} value={branch}>{branch}</option>)}
+                          </select>
+                        </div>
                       </div>
                     </div>
                     <div className="col-6">
                       <div className="form-outline mb-2">
                         <label
                           className="form-label"
-                          htmlFor="customer-first-name"
                         >
                           Enter the Loan Amount 
                         </label>
                         <input
                           type="number"
+                          value={amount}
+                          onChange={(e) => {setAmount(e.target.value)}}
                           required
                         />
                       </div>
