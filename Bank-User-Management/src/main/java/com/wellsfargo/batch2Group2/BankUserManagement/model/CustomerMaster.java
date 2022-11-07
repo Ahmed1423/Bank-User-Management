@@ -17,7 +17,7 @@ public class CustomerMaster {
 
 	@Id
 	@Column(name="customer_number")
-	private Long customerNumber;
+	private String customerNumber;
 
 	@Column(name="firstname",nullable = false, length = 30)
 	private String firstName;
@@ -44,10 +44,10 @@ public class CustomerMaster {
 	@OneToMany(mappedBy = "customerMaster", cascade = CascadeType.ALL)
 	private List<AccountMaster> accountMaster = new ArrayList<>();
 
-	public Long getCustomerNumber() {
+	public String getCustomerNumber() {
 		return customerNumber;
 	}
-	public void setCustomerNumber(Long customerNumber) {
+	public void setCustomerNumber(String customerNumber) {
 		this.customerNumber = customerNumber;
 	}
 	public String getFirstName() {
@@ -96,7 +96,7 @@ public class CustomerMaster {
 	public CustomerMaster() {
 
 	}
-	public CustomerMaster(Long customerNumber, String firstName, String lastName, String customerCity,
+	public CustomerMaster(String customerNumber, String firstName, String lastName, String customerCity,
 						  String customerContactNo, String occupation, Date customerDateOdBirth, String customerPassword) {
 		super();
 		this.customerNumber = customerNumber;

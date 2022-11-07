@@ -10,9 +10,9 @@ import com.wellsfargo.batch2Group2.BankUserManagement.model.LoanDetails;
 
 public interface ICustomerService {
     public String registerAccount(CustomerMaster customer);
-    public Boolean userAccountExists(Long customerId);
+    public Boolean userAccountExists(String customerId);
     public String applyLoan(LoanDetails loanDetails);
-    public String isLoginDetailsCorrect(Long customerId, String password);
+    public String isLoginDetailsCorrect(String customerId, String password);
 }
 
 

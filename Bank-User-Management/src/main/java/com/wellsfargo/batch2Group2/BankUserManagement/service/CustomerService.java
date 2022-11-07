@@ -57,13 +57,13 @@ public class CustomerService implements ICustomerService {
         return "Successful";
     }
 
-    public Boolean userAccountExists(Long customerId) {
+    public Boolean userAccountExists(String customerId) {
         // TODO Auto-generated method stub
         return custRepo.existsById(customerId);
     }
 
     @Override
-    public String isLoginDetailsCorrect(Long customerId, String password) {
+    public String isLoginDetailsCorrect(String customerId, String password) {
         // TODO Auto-generated method stub
         Optional <CustomerMaster> customer = custRepo.findById(customerId);
 //		
@@ -85,6 +85,7 @@ public class CustomerService implements ICustomerService {
     	if(!userAccountExists(loanDetails.getCustomerMaster().getCustomerNumber())) {
             return "INVALID CUSTOMER ID";
         }
+        
     	loanRepo.save(loanDetails);
     	return "Successful";
     }

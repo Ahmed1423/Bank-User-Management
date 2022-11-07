@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wellsfargo.batch2Group2.BankUserManagement.model.CustomerMaster;
+import com.wellsfargo.batch2Group2.BankUserManagement.model.LoanDetails;
 import com.wellsfargo.batch2Group2.BankUserManagement.service.AccountService;
 import com.wellsfargo.batch2Group2.BankUserManagement.service.CustomerService;
 
@@ -31,7 +32,12 @@ public class CustomerController {
         String password = details.substring(1, details.length() - 1).split(",")[1].split(":")[1];
 
         password = password.substring(1, password.length() - 2).trim();
-        return custService.isLoginDetailsCorrect(Long.parseLong(id), password);
+        return custService.isLoginDetailsCorrect(id, password);
+    }
+    
+    @PostMapping("/applyLoan")
+    public String applyLoan(@RequestBody LoanDetails loanDetails){
+        return custService.applyLoan(loanDetails);
     }
 }
 
