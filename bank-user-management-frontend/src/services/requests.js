@@ -1,5 +1,5 @@
 import axios from "axios";
-const base_url = "todo";
+import { base_url } from "./constants";
 
 const post = (url, data) => {
     return axios.post(base_url + url, data);
