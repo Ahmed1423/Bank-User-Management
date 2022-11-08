@@ -33,10 +33,7 @@ public class CustomerService implements ICustomerService {
     @Override
     public String registerAccount(CustomerMaster customer){
         // TODO Auto-generated method stub
-        if(userAccountExists(customer.getCustomerNumber())) {
-            return "Customer Already Exists";
-        }
-
+        try {
         custRepo.save(customer);
         AccountMaster ac = new AccountMaster();
         ac.setAccountOpeningDate(LocalDate.of(2022, Month.NOVEMBER, 05));
@@ -56,8 +53,11 @@ public class CustomerService implements ICustomerService {
         }
         accService.createAccount(ac);
         return "Successful";
+    }catch(Exception e) {
+    	return "Customer Already Exists";
     }
-
+  }
+        
     public Boolean userAccountExists(String customerId) {
         // TODO Auto-generated method stub
         return custRepo.existsById(customerId);
@@ -70,7 +70,7 @@ public class CustomerService implements ICustomerService {
 //		
         if(customer.isEmpty()) return "Account Does not Exist";
         else {
-            password = password.substring(1, password.length() - 1);
+//            password = password.substring(1, password.length() - 1);
             CustomerMaster cust = custRepo.getReferenceById(customerId);
             if(cust.getCustomerPassword().equals(password)) {
                 return "Login Details Correct";

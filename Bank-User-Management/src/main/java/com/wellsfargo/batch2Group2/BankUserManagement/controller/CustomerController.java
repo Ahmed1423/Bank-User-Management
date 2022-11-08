@@ -30,11 +30,13 @@ public class CustomerController {
     @PostMapping("/login")
     public String loginAccount(@RequestBody String details) {
 
-        String id = details.substring(1, details.length() - 1).split(",")[0].split(":")[1].trim();
-        String password = details.substring(1, details.length() - 1).split(",")[1].split(":")[1];
-
-        password = password.substring(1, password.length() - 2).trim();
-        return custService.isLoginDetailsCorrect(id, password);
+    	 String id = details.substring(1, details.length() - 1).split(",")[0].split(":")[1];
+         String password = details.substring(1, details.length() - 1).split(",")[1].split(":")[1];
+         id = id.substring(1, id.length() - 1).strip();
+         password = password.substring(1, password.length() - 1).strip();
+         System.out.println(id + " " + password);
+         String ans = custService.isLoginDetailsCorrect(id, password);
+         return ans;
     }
     
     @PostMapping("/applyLoan")

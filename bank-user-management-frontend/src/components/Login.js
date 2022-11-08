@@ -1,32 +1,39 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import * as utils from '../services/requests';
+import * as utils from "../services/requests";
 
 function Login() {
-
   const navigate = useNavigate();
 
   const route_ = (path) => {
-      navigate(path);
-  }
+    navigate(path);
+  };
 
   let [customerId, setCustomerId] = useState(0);
   let [customerPassword, setCustomerPassword] = useState("");
 
   let handleSubmit = (e) => {
     e.preventDefault();
-    utils.post("/login", {"customerId": customerId, "customerPassword": customerPassword})
-    .then((response) => {
-      if(response.data === "Successful") {
-        sessionStorage.setItem('user', customerId);
-        route_("/menu");
-      } else {
-        window.alert("Invalid credentials");
-      }
-    })
-    .catch((err) => {
-      console.log(err.response.status);
-    })
+    utils
+      .post("/login", {
+        customerId: customerId,
+        customerPassword: customerPassword,
+      })
+      .then((response) => {
+        if (response.data === "Login Details Correct") {
+          sessionStorage.setItem("user", customerId);
+          route_("/menu");
+        } else if (response.data === "Login Details incorrect") {
+          window.alert("Invalid credentials");
+        } else {
+          window.alert("Please Create an account to Login");
+          route_("/register");
+        }
+        console.log(response.data);
+      })
+      .catch((err) => {
+        console.log(err.response.status);
+      });
   };
 
   return (

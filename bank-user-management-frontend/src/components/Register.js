@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import * as utils from '../services/requests';
+import * as utils from "../services/requests";
 
 function validate(customer) {
   let isCorrect = true;
@@ -19,12 +19,11 @@ function validate(customer) {
 }
 
 function Register() {
-
   const navigate = useNavigate();
 
   const route_ = (path) => {
-      navigate(path);
-  }
+    navigate(path);
+  };
 
   let [customerNumber, setCustomerNumber] = useState(0);
   let [firstName, setFirstName] = useState("");
@@ -33,38 +32,41 @@ function Register() {
   let [phone, setPhone] = useState(0);
   let [occupation, setOccupation] = useState("");
   let [dob, setDob] = useState();
-  let [customerPassword, setCustomerPassword] = useState('');
+  let [customerPassword, setCustomerPassword] = useState("");
 
   let handleSubmit = (e) => {
     e.preventDefault();
 
     let customer = {
-      "customerNumber": customerNumber,
-      "firstName": firstName,
-      "lastName": lastName,
-      "customerCity": city,
-      "customerContactNo": phone,
-      "occupation": occupation,
-      "customerDateOdBirth": dob,
-      "customerPassword": customerPassword
+      customerNumber: customerNumber,
+      firstName: firstName,
+      lastName: lastName,
+      customerCity: city,
+      customerContactNo: phone,
+      occupation: occupation,
+      customerDateOdBirth: dob,
+      customerPassword: customerPassword,
     };
 
     if (validate(customer)) {
       console.log(JSON.stringify(customer));
-      utils.post("register", customer)
-      .then((response) => {
-        if(response.data === "Successful") {
-          sessionStorage.setItem('user', customerNumber);
-          route_("/menu");
-        } else {
-          window.alert(response.data)
-        }
-      })
-      .catch((err) => {
-        console.log(err.response.status);
-      })
-    }
-    else {
+      utils
+        .post("/register", customer)
+        .then((response) => {
+          console.log(response.data);
+          if (response.data === "Successful") {
+            sessionStorage.setItem("user", customerNumber);
+            window.alert("Account has been created successfully, Please Login");
+            route_("/login");
+          } else {
+            window.alert(response.data);
+            route_("/register");
+          }
+        })
+        .catch((err) => {
+          console.log(err.response.status);
+        });
+    } else {
       console.log("Something");
     }
   };
@@ -223,15 +225,15 @@ function Register() {
 
                     <div className="col-6">
                       <div className="form-outline mb-2">
-                        <label
-                          className="form-label"
-                        >
+                        <label className="form-label">
                           Enter your customer ID
                         </label>
                         <input
                           type="number"
                           value={customerNumber}
-                          onChange={(e) => {setCustomerNumber(e.target.value)}}
+                          onChange={(e) => {
+                            setCustomerNumber(e.target.value);
+                          }}
                           required
                         />
                       </div>
@@ -239,20 +241,19 @@ function Register() {
 
                     <div className="col-6">
                       <div className="form-outline mb-2">
-                        <label
-                          className="form-label"
-                        >
+                        <label className="form-label">
                           Enter your password
                         </label>
                         <input
                           type="password"
                           value={customerPassword}
-                          onChange={(e) => {setCustomerPassword(e.target.value)}}
+                          onChange={(e) => {
+                            setCustomerPassword(e.target.value);
+                          }}
                           required
                         />
                       </div>
                     </div>
-
                   </div>
 
                   <div className="d-grid gap-2">

@@ -17,8 +17,8 @@ import com.wellsfargo.batch2Group2.BankUserManagement.dao.StatementRequest;
 import com.wellsfargo.batch2Group2.BankUserManagement.model.TransactionDetails;
 import com.wellsfargo.batch2Group2.BankUserManagement.service.TransactionService;
 
-@RestController
 @CrossOrigin(origins="*")
+@RestController
 public class TransactionController {
 	
 	@Autowired
