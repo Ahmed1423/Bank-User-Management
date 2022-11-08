@@ -1,2 +1,4 @@
-const branches = [...Array(10).keys()].map(x => "Branch" + x);
-export {branches};
+const branches = ["Hyderabad", "Bangalore", "Chennai"];
+const base_url = "http://localhost:8080/";
+
+export {branches, base_url};
