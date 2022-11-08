@@ -5,6 +5,7 @@ public class TransactionRequest {
 	private String customerNumber;
     private int transactionAmount;
     private String transcationType;
+    
 	public String getCustomerNumber() {
 		return customerNumber;
 	}

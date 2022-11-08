@@ -57,6 +57,7 @@ public class TransactionService implements ITransactionService {
 	
 	@Override
 	public List<TransactionDetails> getStatement(StatementRequest sr){
+		
 		return repo.getStatementfromAccFromToDate(sr.getCustomerId()+"1", sr.getTransactionType() , sr.getFrom(),sr.getTo());
 	}
 	
