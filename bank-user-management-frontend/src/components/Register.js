@@ -60,7 +60,6 @@ function Register() {
             route_("/login");
           } else {
             window.alert(response.data);
-            route_("/register");
           }
         })
         .catch((err) => {

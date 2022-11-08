@@ -19,23 +19,24 @@ public class AccountService implements IAccountService {
     }
 
 	@Override
-	public void depositAmount(String accountNumber, int amount) {
+	public String depositAmount(String accountNumber, int amount) {
 		// TODO Auto-generated method stub
 		AccountMaster account = repo.getReferenceById(accountNumber);
 		account.setBalance(account.getBalance() + amount);
 		repo.save(account);
+		return "Deposited Successfully";
 	}
 
 	@Override
-	public boolean withdrawAmount(String accountNumber, int amount) {
+	public String withdrawAmount(String accountNumber, int amount) {
 		// TODO Auto-generated method stub
 		AccountMaster account = repo.getReferenceById(accountNumber);
 		if(amount > account.getBalance()) {
-			return false;
+			return "InSufficient Balance";
 		}
 		account.setBalance(account.getBalance() - amount);
 		repo.save(account);
-		return true;
+		return "Withdrawed Successfully";
 	}
 
 }

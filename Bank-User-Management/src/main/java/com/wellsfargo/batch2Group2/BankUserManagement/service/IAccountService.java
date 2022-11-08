@@ -5,7 +5,7 @@ import com.wellsfargo.batch2Group2.BankUserManagement.model.AccountMaster;
 
 public interface IAccountService {
     public void createAccount(AccountMaster account);
-	public void depositAmount(String accountNumber, int amount);
-	public boolean withdrawAmount(String accountNumber, int amount);
+	public String depositAmount(String accountNumber, int amount);
+	public String withdrawAmount(String accountNumber, int amount);
 }
 

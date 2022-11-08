@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "customer_master")
@@ -29,7 +29,7 @@ public class CustomerMaster {
 	private String customerCity;
 	@Column(name="customer_contact_no",nullable = false, length = 10)
 	private String customerContactNo;
-	@Column(name="occupation",nullable = false, length = 20, unique=true)
+	@Column(name="occupation",nullable = false, length = 20)
 	private String occupation;
 	@Column(name="customer_date_of_birth",nullable = false)
 	private Date customerDateOdBirth;
@@ -44,7 +44,7 @@ public class CustomerMaster {
 	}
 
 	@OneToMany(mappedBy = "customerMaster", cascade = CascadeType.ALL)
-	@JsonManagedReference
+	@JsonIgnore
 	private List<AccountMaster> accountMaster = new ArrayList<>();
 
 	public String getCustomerNumber() {

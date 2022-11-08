@@ -63,7 +63,7 @@ public class TransactionService implements ITransactionService {
 		String accNumber = accountNumber;
 		int amount = details.getTransactionAmount();
 		
-		if(serv.withdrawAmount(accNumber, amount)) {
+		if(serv.withdrawAmount(accNumber, amount).equals("Withdrawed Successfully")) {
 			t.setDateOfTransaction(LocalDate.now());
 			t.setMediumOftransaction("Rs");
 			t.setTransactionAmount(details.getTransactionAmount());
