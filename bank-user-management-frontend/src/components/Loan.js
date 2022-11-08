@@ -9,7 +9,7 @@ const Loan = (props) => {
     console.log(branch + " " + amount);
   };
 
-  const [branch, setBranch] = useState('');
+  const [branch, setBranch] = useState("Hyderabad");
   const [amount, setAmount] = useState(0);
 
   if(sessionStorage.getItem('user') === null) {

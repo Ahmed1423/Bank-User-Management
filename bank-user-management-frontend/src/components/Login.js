@@ -10,21 +10,23 @@ function Login() {
       navigate(path);
   }
 
-  let [customerId, setCustomerId] = useState("");
+  let [customerId, setCustomerId] = useState(0);
   let [customerPassword, setCustomerPassword] = useState("");
 
   let handleSubmit = (e) => {
     e.preventDefault();
     utils.post("/login", {"customerId": customerId, "customerPassword": customerPassword})
     .then((response) => {
-      console.log(response);
+      if(response.data === "Successful") {
+        sessionStorage.setItem('user', customerId);
+        route_("/menu");
+      } else {
+        window.alert("Invalid credentials");
+      }
     })
     .catch((err) => {
       console.log(err.response.status);
     })
-    sessionStorage.setItem('user', customerId);
-    console.log(customerId + " " + customerPassword);
-    route_("/menu");
   };
 
   return (
@@ -44,7 +46,7 @@ function Login() {
                 <form onSubmit={handleSubmit}>
                   <div className="form-outline mb-4">
                     <input
-                      type="text"
+                      type="number"
                       id="customer-id"
                       className="form-control form-control-lg"
                       name="customer-id"

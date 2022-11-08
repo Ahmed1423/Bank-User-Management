@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import * as utils from '../services/requests';
 
 function validate(customer) {
   let isCorrect = true;
@@ -18,27 +19,54 @@ function validate(customer) {
 }
 
 function Register() {
+
+  const navigate = useNavigate();
+
+  const route_ = (path) => {
+      navigate(path);
+  }
+
+  let [customerNumber, setCustomerNumber] = useState(0);
   let [firstName, setFirstName] = useState("");
   let [lastName, setLastName] = useState("");
   let [city, setCity] = useState("");
   let [phone, setPhone] = useState(0);
   let [occupation, setOccupation] = useState("");
   let [dob, setDob] = useState();
+  let [customerPassword, setCustomerPassword] = useState('');
 
   let handleSubmit = (e) => {
     e.preventDefault();
 
     let customer = {
-      firstName,
-      lastName,
-      city,
-      phone,
-      occupation,
-      dob,
+      "customerNumber": customerNumber,
+      "firstName": firstName,
+      "lastName": lastName,
+      "customerCity": city,
+      "customerContactNo": phone,
+      "occupation": occupation,
+      "customerDateOdBirth": dob,
+      "customerPassword": customerPassword
     };
 
-    if (validate(customer)) console.log(customer);
-    else console.log("Something");
+    if (validate(customer)) {
+      console.log(JSON.stringify(customer));
+      utils.post("register", customer)
+      .then((response) => {
+        if(response.data === "Successful") {
+          sessionStorage.setItem('user', customerNumber);
+          route_("/menu");
+        } else {
+          window.alert(response.data)
+        }
+      })
+      .catch((err) => {
+        console.log(err.response.status);
+      })
+    }
+    else {
+      console.log("Something");
+    }
   };
 
   return (
@@ -192,6 +220,39 @@ function Register() {
                         </small>
                       </div>
                     </div>
+
+                    <div className="col-6">
+                      <div className="form-outline mb-2">
+                        <label
+                          className="form-label"
+                        >
+                          Enter your customer ID
+                        </label>
+                        <input
+                          type="number"
+                          value={customerNumber}
+                          onChange={(e) => {setCustomerNumber(e.target.value)}}
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div className="col-6">
+                      <div className="form-outline mb-2">
+                        <label
+                          className="form-label"
+                        >
+                          Enter your password
+                        </label>
+                        <input
+                          type="password"
+                          value={customerPassword}
+                          onChange={(e) => {setCustomerPassword(e.target.value)}}
+                          required
+                        />
+                      </div>
+                    </div>
+
                   </div>
 
                   <div className="d-grid gap-2">
