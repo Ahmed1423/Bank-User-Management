@@ -14,6 +14,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "transaction_details")
 public class TransactionDetails {
@@ -37,6 +39,7 @@ public class TransactionDetails {
 	
 	@ManyToOne
 	@JoinColumn(name ="account_number", nullable = false)
+	@JsonBackReference
 	private AccountMaster accountMaster;
 
 	public String getTransactionNumber() {

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import GoToLogin from './GoToLogin';
 import * as constants from '../services/constants';
+import Menu from "./Menu";
 
 const Loan = (props) => {
 
@@ -17,6 +18,7 @@ const Loan = (props) => {
   }
 
     return <>
+    <Menu> </Menu>
         <div className="mb-md-1 mt-md-1 pb-1">
                 <h2 className="fw-bold text-uppercase">Loan</h2>
                 <p className="text-dark-50 mb-3">Please the details!</p>

@@ -8,6 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "loan_details")
 public class LoanDetails {
@@ -17,10 +19,12 @@ public class LoanDetails {
 
 	    @ManyToOne
 	    @JoinColumn(name ="customer_number", nullable = false)
+	    @JsonBackReference
 	    private CustomerMaster customerMaster;
 
 	    @ManyToOne
 	    @JoinColumn(name ="branch_id", nullable = false)
+	    @JsonBackReference
 	    private BranchMaster branchMaster;
 	    
 	    @Column(name="loan_amount",nullable = false, length = 7)
