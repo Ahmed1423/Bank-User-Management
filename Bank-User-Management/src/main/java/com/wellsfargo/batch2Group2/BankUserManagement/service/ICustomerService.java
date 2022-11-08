@@ -6,10 +6,13 @@ import com.wellsfargo.batch2Group2.BankUserManagement.Exception.ResourceNotFound
 
 //import com.wellsfargo.batch2Group2.BankUserManagement.Exception.ResourceNotFoundException;
 import com.wellsfargo.batch2Group2.BankUserManagement.model.CustomerMaster;
+import com.wellsfargo.batch2Group2.BankUserManagement.model.LoanDetails;
 
 public interface ICustomerService {
     public String registerAccount(CustomerMaster customer);
-    public String isLoginDetailsCorrect(Long customerId, String password) throws ResourceNotFoundException;
+    public Boolean userAccountExists(String customerId);
+    public String applyLoan(LoanDetails loanDetails);
+    public String isLoginDetailsCorrect(String customerId, String password);
 }
 
 

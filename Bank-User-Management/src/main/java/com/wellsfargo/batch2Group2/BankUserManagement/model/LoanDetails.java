@@ -15,17 +15,23 @@ public class LoanDetails {
 	    @GeneratedValue
 	    private Long id;
 
-	    @Column(name="branch_city",nullable = false, length = 100)
-	    private String branchCity;
-
-	    //@ManyToOne(mappedBy = "account", cascade = CascadeType.ALL)
 	    @ManyToOne
 	    @JoinColumn(name ="customer_number", nullable = false)
 	    private CustomerMaster customerMaster;
-	    //private List<AccountSettings> accountSettings = new ArrayList<>();
+
 	    @ManyToOne
 	    @JoinColumn(name ="branch_id", nullable = false)
 	    private BranchMaster branchMaster;
+	    
+	    @Column(name="loan_amount",nullable = false, length = 7)
+	    private int loanAmount;
+	    
+	    @Column(name="C_ID",nullable = false)
+	    private String customerNumber;
+	    
+	    @Column(name="B_ID",nullable = false, length = 7)
+	    private String branchId;
+	    
 	    // getters and setters
 		public Long getId() {
 			return id;
@@ -33,11 +39,12 @@ public class LoanDetails {
 		public void setId(Long id) {
 			this.id = id;
 		}
-		public String getBranchCity() {
-			return branchCity;
+		
+		public int getLoanAmount() {
+			return loanAmount;
 		}
-		public void setBranchCity(String branchCity) {
-			this.branchCity = branchCity;
+		public void setLoanAmount(int loanAmount) {
+			this.loanAmount = loanAmount;
 		}
 		public CustomerMaster getCustomerMaster() {
 			return customerMaster;
@@ -54,4 +61,24 @@ public class LoanDetails {
 		public LoanDetails() {
 			
 		}
+		public String getCustomerNumber() {
+			return customerNumber;
+		}
+		public void setCustomerNumber(String customerNumber) {
+			this.customerNumber = customerNumber;
+		}
+		public String getBranchId() {
+			return branchId;
+		}
+		public void setBranchId(String branchId) {
+			this.branchId = branchId;
+		}
+		@Override
+		public String toString() {
+			return "LoanDetails [id=" + id + ", customerMaster=" + customerMaster + ", branchMaster=" + branchMaster
+					+ ", loanAmount=" + loanAmount + ", customerNumber=" + customerNumber + ", branchId=" + branchId
+					+ "]";
+		}
+		
+		
 }

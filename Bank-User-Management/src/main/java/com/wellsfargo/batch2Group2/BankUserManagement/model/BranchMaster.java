@@ -15,12 +15,12 @@ import javax.persistence.Table;
 @Table(name = "branch_master")
 public class BranchMaster {
 	@Id
-    private Long branch_id;
+    private String branch_id;
 	
-	public Long getBranch_id() {
+	public String getBranch_id() {
 		return branch_id;
 	}
-	public void setBranch_id(Long branch_id) {
+	public void setBranch_id(String branch_id) {
 		this.branch_id = branch_id;
 	}
 	public String getBranchName() {

@@ -1,10 +1,26 @@
 import React, { useState } from "react";
 import GoToLogin from "./GoToLogin";
+import Menu from "./Menu";
+import * as utils from '../services/requests';
+import { format } from 'date-fns';
+
 
 const ViewStatement = (props) => {
 
   const handleSubmit = (e) => {
       e.preventDefault();
+      console.log(transaction + " " + fromDate + " " + toDate);
+
+      utils.post("/getStatement", { "customerId": sessionStorage.getItem('user'),
+      "transactionType": transaction,
+      "from": format( Date.parse(fromDate), 'yyyy-MM-dd'),
+      "to":format( Date.parse(toDate), 'yyyy-MM-dd')})
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
       console.log(transaction + " " + fromDate + " " + toDate);
   };
 
@@ -18,6 +34,7 @@ const ViewStatement = (props) => {
 
     return (
     <>
+    <Menu></Menu>
         <div className="mb-md-1 mt-md-1 pb-1">
                 <h2 className="fw-bold text-uppercase">View Statements</h2>
                 <p className="text-dark-50 mb-3">Please the details!</p>

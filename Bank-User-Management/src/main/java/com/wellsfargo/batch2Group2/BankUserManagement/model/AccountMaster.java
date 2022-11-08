@@ -39,6 +39,9 @@ public class AccountMaster {
 
 	@Column(name="account_status",nullable = false, length = 30)
 	private String accountStatus;
+	
+	@Column(name="account_balance",nullable = false, length = 7)
+	private int accountBalance;
 
 	@ManyToOne
 	@JoinColumn(name ="customer_number", nullable = false)

@@ -10,8 +10,11 @@ import org.springframework.stereotype.Service;
 import com.wellsfargo.batch2Group2.BankUserManagement.dao.AccountRepository;
 import com.wellsfargo.batch2Group2.BankUserManagement.dao.BranchRepository;
 import com.wellsfargo.batch2Group2.BankUserManagement.dao.CustomerRepository;
+import com.wellsfargo.batch2Group2.BankUserManagement.dao.LoanRepository;
 import com.wellsfargo.batch2Group2.BankUserManagement.model.AccountMaster;
+import com.wellsfargo.batch2Group2.BankUserManagement.model.BranchMaster;
 import com.wellsfargo.batch2Group2.BankUserManagement.model.CustomerMaster;
+import com.wellsfargo.batch2Group2.BankUserManagement.model.LoanDetails;
 
 @Service
 public class CustomerService implements ICustomerService {
@@ -24,6 +27,8 @@ public class CustomerService implements ICustomerService {
     BranchRepository br;
     @Autowired
     AccountService accService;
+    @Autowired
+    LoanRepository loanRepo;
 
     @Override
     public String registerAccount(CustomerMaster customer){
@@ -41,25 +46,25 @@ public class CustomerService implements ICustomerService {
         ac.setBalance(0);
         if(customer.getCustomerCity().equals("Hyderabad")) {
             ac.setAccountNumber(customer.getCustomerNumber().toString() + "1");
-            ac.setBranchMaster(br.getReferenceById(1L));
+            ac.setBranchMaster(br.getReferenceById("1"));
         } else if(customer.getCustomerCity().equals("Bangalore")) {
             ac.setAccountNumber(customer.getCustomerNumber().toString() + "2");
-            ac.setBranchMaster(br.getReferenceById(2L));
+            ac.setBranchMaster(br.getReferenceById("2"));
         } else {
             ac.setAccountNumber(customer.getCustomerNumber().toString() + "3");
-            ac.setBranchMaster(br.getReferenceById(3L));
+            ac.setBranchMaster(br.getReferenceById("3"));
         }
         accService.createAccount(ac);
         return "Successful";
     }
 
-    public Boolean userAccountExists(Long customerId) {
+    public Boolean userAccountExists(String customerId) {
         // TODO Auto-generated method stub
         return custRepo.existsById(customerId);
     }
 
     @Override
-    public String isLoginDetailsCorrect(Long customerId, String password) {
+    public String isLoginDetailsCorrect(String customerId, String password) {
         // TODO Auto-generated method stub
         Optional <CustomerMaster> customer = custRepo.findById(customerId);
 //		
@@ -74,5 +79,19 @@ public class CustomerService implements ICustomerService {
                 return "Login Details incorrect";
             }
         }
+    }
+    
+    @Override
+    public String applyLoan(LoanDetails loanDetails) {
+    	System.out.println(loanDetails.toString());
+    	if(!userAccountExists(loanDetails.getCustomerNumber())) {
+            return "INVALID CUSTOMER ID";
+        }
+    	CustomerMaster cust = custRepo.getReferenceById(loanDetails.getCustomerNumber());
+    	BranchMaster br1 = br.getReferenceById(loanDetails.getBranchId());
+    	loanDetails.setBranchMaster(br1);
+    	loanDetails.setCustomerMaster(cust);
+    	loanRepo.save(loanDetails);
+    	return "Successful";
     }
 }
