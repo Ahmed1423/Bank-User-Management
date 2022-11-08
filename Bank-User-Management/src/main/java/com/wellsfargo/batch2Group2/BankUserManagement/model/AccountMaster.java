@@ -13,6 +13,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "account_master")
 public class AccountMaster {
@@ -45,17 +48,19 @@ public class AccountMaster {
 
 	@ManyToOne
 	@JoinColumn(name ="customer_number", nullable = false)
+	@JsonBackReference
 	private CustomerMaster customerMaster;
 	
 	@ManyToOne
 	@JoinColumn(name ="branch_id", nullable = false)
-	
+	@JsonBackReference
 	private BranchMaster branchMaster;
 	@Column(name="account_opening_date",nullable = false)
 	
 	private LocalDate accountOpeningDate;
 
 	@OneToMany(mappedBy = "accountMaster", cascade = CascadeType.ALL)
+	@JsonManagedReference
 	private List<TransactionDetails> transactionDetails = new ArrayList<>();
 	
 

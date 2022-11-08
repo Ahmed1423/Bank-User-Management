@@ -4,7 +4,7 @@ public class TransactionRequest {
 	
 	private String customerNumber;
     private int transactionAmount;
-    private String transcationType;
+    private String transactionType;
     
 	public String getCustomerNumber() {
 		return customerNumber;
@@ -18,11 +18,17 @@ public class TransactionRequest {
 	public void setTransactionAmount(int transactionAmount) {
 		this.transactionAmount = transactionAmount;
 	}
-	public String getTranscationType() {
-		return transcationType;
+	
+	public String getTransactionType() {
+		return transactionType;
 	}
-	public void setTranscationType(String transcationType) {
-		this.transcationType = transcationType;
+	public void setTransactionType(String transactionType) {
+		this.transactionType = transactionType;
+	}
+	@Override
+	public String toString() {
+		return "TransactionRequest [customerNumber=" + customerNumber + ", transactionAmount=" + transactionAmount
+				+ ", transactionType=" + transactionType + "]";
 	}
 
 

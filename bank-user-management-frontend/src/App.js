@@ -7,6 +7,7 @@ import Menu from "./components/Menu";
 import Loan from "./components/Loan";
 import Transactions from "./components/Transactions";
 import ViewStatement from "./components/ViewStatement";
+import JsonTable from "./components/JsonTable";
 
 function App() {
   return (
@@ -18,6 +19,8 @@ function App() {
         <Route exact path="/loan" element={<Loan/>} />
         <Route exact path="/transactions" element={<Transactions/>} />
         <Route exact path="/viewstatement" element={<ViewStatement/>} />
+        <Route exact path="/jsonTable" element={<JsonTable/>} />
+
       </Routes>
     </BrowserRouter>
   );
