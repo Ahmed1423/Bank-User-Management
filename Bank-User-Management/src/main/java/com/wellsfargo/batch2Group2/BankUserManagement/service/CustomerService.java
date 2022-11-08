@@ -2,6 +2,7 @@ package com.wellsfargo.batch2Group2.BankUserManagement.service;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +58,10 @@ public class CustomerService implements ICustomerService {
         accService.createAccount(ac);
         return "Successful";
     }
+    
+    public List<String> getAccountNumber(String customerId){
+    	return accRepo.getAccountNumbersFromCusId(customerId);
+    }
 
     public Boolean userAccountExists(String customerId) {
         // TODO Auto-generated method stub
@@ -94,4 +99,6 @@ public class CustomerService implements ICustomerService {
     	loanRepo.save(loanDetails);
     	return "Successful";
     }
+    
+    
 }

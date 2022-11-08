@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 
 @Entity
 @Table(name = "branch_master")
@@ -53,8 +55,10 @@ public class BranchMaster {
     private String branchCity;
 	
 	 @OneToMany(mappedBy = "branchMaster", cascade = CascadeType.ALL)
+	 @JsonManagedReference
 	    private List<LoanDetails> loanDetails = new ArrayList<>();
 	 @OneToMany(mappedBy = "branchMaster", cascade = CascadeType.ALL)
+	 @JsonManagedReference
 	    private List<AccountMaster> accountMaster = new ArrayList<>();
 
 	 public BranchMaster() {

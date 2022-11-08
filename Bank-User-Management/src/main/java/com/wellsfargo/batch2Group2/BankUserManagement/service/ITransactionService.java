@@ -4,10 +4,11 @@ import java.util.List;
 
 import com.wellsfargo.batch2Group2.BankUserManagement.dao.StatementRequest;
 import com.wellsfargo.batch2Group2.BankUserManagement.model.TransactionDetails;
+import com.wellsfargo.batch2Group2.BankUserManagement.model.TransactionRequest;
 
 public interface ITransactionService {
 
-	public String depositAmount(TransactionDetails details, String accountNumber);
-	public String withdrawAmount(TransactionDetails details, String accountNumber);
-	List<TransactionDetails> getStatement(StatementRequest sr);
+	public String depositAmount(TransactionRequest details, String accountNumber);
+	public String withdrawAmount(TransactionRequest details, String accountNumber);
+	String getStatement(StatementRequest sr) throws Exception;
 }

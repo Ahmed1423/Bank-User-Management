@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import GoToLogin from "./GoToLogin";
+import Menu from "./Menu";
+import * as utils from '../services/requests';
 
 const Transactions = (props) => {
   
@@ -8,6 +10,15 @@ const Transactions = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    utils.post("/makeTransaction", { "customerNumber": sessionStorage.getItem('user'),
+      "transactionType": transaction,
+      "transactionAmount": amount})
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
     console.log(transaction + " " + amount);
   }
 
@@ -16,6 +27,7 @@ const Transactions = (props) => {
   }
 
     return <>
+    <Menu> </Menu>
         <div className="mb-md-1 mt-md-1 pb-1">
                 <h2 className="fw-bold text-uppercase">Transactions</h2>
                 <p className="text-dark-50 mb-3">Please the details!</p>

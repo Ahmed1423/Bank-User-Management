@@ -1,13 +1,21 @@
 import React, { useState } from "react";
 import GoToLogin from "./GoToLogin";
 import Menu from "./Menu";
+import { useNavigate } from "react-router-dom";
 import * as utils from '../services/requests';
 import { format } from 'date-fns';
 
 
+
 const ViewStatement = (props) => {
+  const navigate = useNavigate();
+
+  const route_ = (path) => {
+      navigate(path);
+  }
 
   const handleSubmit = (e) => {
+
       e.preventDefault();
       console.log(transaction + " " + fromDate + " " + toDate);
 
@@ -16,7 +24,10 @@ const ViewStatement = (props) => {
       "from": format( Date.parse(fromDate), 'yyyy-MM-dd'),
       "to":format( Date.parse(toDate), 'yyyy-MM-dd')})
     .then((response) => {
-      console.log(response);
+      console.log(response.data);
+      sessionStorage.setItem('data',JSON.stringify(response.data));
+      console.log(JSON.parse(sessionStorage.getItem('data')));
+      route_("/jsonTable");
     })
     .catch((err) => {
       console.log(err);
