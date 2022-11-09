@@ -24,7 +24,7 @@ public class AccountService implements IAccountService {
 		AccountMaster account = repo.getReferenceById(accountNumber);
 		account.setBalance(account.getBalance() + amount);
 		repo.save(account);
-		return "Deposited Successfully";
+		return "Deposited Successfully. Total Amount present in your account is " + account.getBalance();
 	}
 
 	@Override
@@ -32,11 +32,11 @@ public class AccountService implements IAccountService {
 		// TODO Auto-generated method stub
 		AccountMaster account = repo.getReferenceById(accountNumber);
 		if(amount > account.getBalance()) {
-			return "InSufficient Balance";
+			return "InSufficient Balance. You have only " + account.getBalance() + " in your account";
 		}
 		account.setBalance(account.getBalance() - amount);
 		repo.save(account);
-		return "Withdrawed Successfully";
+		return "Withdrawed Successfully. Total Amount present in your account is " + account.getBalance();
 	}
 
 }

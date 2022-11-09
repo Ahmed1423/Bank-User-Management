@@ -47,13 +47,13 @@ public class TransactionService implements ITransactionService {
 		System.out.println(t.getAccountMaster());
 		String accNumber = accountNumber;
 		int amount = details.getTransactionAmount();
-		serv.depositAmount(accNumber, amount);
+		String stmt = serv.depositAmount(accNumber, amount);
 		t.setDateOfTransaction(LocalDate.now());
 		t.setMediumOftransaction("Rupees");
 		t.setTransactionAmount(details.getTransactionAmount());
 		t.setTransactionType(details.getTransactionType());
 		repo.save(t);
-		return "successful";
+		return stmt;
 	}
 
 	@Override
@@ -66,16 +66,18 @@ public class TransactionService implements ITransactionService {
 		String accNumber = accountNumber;
 		int amount = details.getTransactionAmount();
 		
-		if(serv.withdrawAmount(accNumber, amount).equals("Withdrawed Successfully")) {
+		String stmt = serv.withdrawAmount(accNumber, amount);
+		
+		if(stmt.startsWith("Withdrawed Successfully")) {
 			t.setDateOfTransaction(LocalDate.now());
 			t.setMediumOftransaction("Rs");
 			t.setTransactionAmount(details.getTransactionAmount());
 			t.setTransactionType(details.getTransactionType());
 			
 			repo.save(t);
-			return "Successful";
+			return stmt;
 		} else {
-			return "No Sufficient Balance";
+			return stmt;
 		}
 	}
 	
