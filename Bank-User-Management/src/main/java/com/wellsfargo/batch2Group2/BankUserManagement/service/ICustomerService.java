@@ -13,6 +13,7 @@ public interface ICustomerService {
     public Boolean userAccountExists(String customerId);
     public String applyLoan(LoanDetails loanDetails);
     public String isLoginDetailsCorrect(String customerId, String password);
+	String viewLoan(String customerId) throws Exception;
 }
 
 

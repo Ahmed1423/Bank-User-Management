@@ -10,8 +10,8 @@ class JSONTABLE extends Component {
   componentWillMount() {
     this.state = {
       data: JSON.parse(sessionStorage.getItem("data")),
+      text:sessionStorage.getItem("text")
     };
-    console.log("NANANANANA");
     console.log(this.state.data);
   }
 
@@ -20,7 +20,7 @@ class JSONTABLE extends Component {
       <div>
         <Menu></Menu>
         <br></br>
-        <b>------ TRANSACTION STATEMENT ------</b>
+        <b>------ {this.state.text} ------</b>
         <br />
         <br />
         <JsonToTable json={this.state.data} />

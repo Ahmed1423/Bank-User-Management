@@ -26,6 +26,8 @@ const ViewStatement = (props) => {
       .then((response) => {
         console.log(response.data);
         sessionStorage.setItem("data", JSON.stringify(response.data));
+        sessionStorage.setItem("text", "TRANSACTION STATEMENT");
+
         console.log(JSON.parse(sessionStorage.getItem("data")));
         route_("/jsonTable");
       })

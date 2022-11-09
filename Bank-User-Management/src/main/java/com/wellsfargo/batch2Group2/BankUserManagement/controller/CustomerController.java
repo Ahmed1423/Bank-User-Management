@@ -3,9 +3,13 @@ package com.wellsfargo.batch2Group2.BankUserManagement.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wellsfargo.batch2Group2.BankUserManagement.model.CustomerMaster;
@@ -44,5 +48,12 @@ public class CustomerController {
     	System.out.println(loanDetails);
         return custService.applyLoan(loanDetails);
     }
+    @GetMapping("/viewLoan")
+    public ResponseEntity applyLoan(@RequestParam String customerId) throws Exception{
+    	System.out.println(customerId);
+        return new ResponseEntity(custService.viewLoan(customerId),HttpStatus.OK);
+    }
+    
+    
 }
 

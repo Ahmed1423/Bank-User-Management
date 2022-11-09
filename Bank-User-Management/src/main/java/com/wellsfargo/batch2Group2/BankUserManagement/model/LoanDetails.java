@@ -20,13 +20,13 @@ public class LoanDetails {
 
 	    @ManyToOne
 	    @JoinColumn(name ="customer_number", nullable = false)
-//	    @JsonBackReference
+	    @JsonBackReference
 	    @JsonIgnore
 	    private CustomerMaster customerMaster;
 
 	    @ManyToOne
 	    @JoinColumn(name ="branch_id", nullable = false)
-//	    @JsonBackReference
+	    @JsonBackReference
 	    @JsonIgnore
 	    private BranchMaster branchMaster;
 	    

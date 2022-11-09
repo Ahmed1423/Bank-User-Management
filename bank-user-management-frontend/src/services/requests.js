@@ -9,7 +9,7 @@ const post = async (url, data) => {
 };
 
 const get = (url, data) => {
-  return axios.get(base_url + url);
+  return axios.get(base_url + url,{params: data});
 };
 
 export { get, post };

@@ -102,5 +102,12 @@ public class CustomerService implements ICustomerService {
     	return "Successful";
     }
     
+    @Override
+    public String viewLoan(String customerId) throws Exception {
+    	List<LoanDetails> ld = loanRepo.getloandetails(customerId);
+    	return ServiceUtils.convertJava2JSON(ld);
+    	
+    }
+    
     
 }

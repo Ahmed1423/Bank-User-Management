@@ -3,8 +3,14 @@ import GoToLogin from "./GoToLogin";
 import * as constants from "../services/constants";
 import Menu from "./Menu";
 import * as utils from "../services/requests";
+import { useNavigate } from "react-router-dom";
 
 const Loan = (props) => {
+  const navigate = useNavigate();
+
+  const route_ = (path) => {
+    navigate(path);
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     const branchId = {
@@ -26,6 +32,45 @@ const Loan = (props) => {
         console.log(err);
         window.alert("Loan Not Submitted");
       });
+  };
+  const formatLoanData = (data) =>{
+    console.log(data)
+    let rlist = []
+    let ret = {}
+    for(var i=0;i<data.length;i++){
+      console.log(data[i]['id'])
+      ret['Loan request ID'] = data[i]['id'];
+      ret['Customer ID'] = data[i]['customerNumber'];
+      ret['Customer Name'] = data[i]['customerMaster']['firstName'] + " " +data[i]['customerMaster']['lastName'];
+      ret['Loan Amount'] = data[i]['loanAmount'];
+      ret['Branch ID'] = data[i]['branchId'];
+      ret['Branch Name'] = data[i]['branchMaster']['BranchName'];
+      ret['Branch City'] = data[i]['branchMaster']['branchCity'];
+  
+      rlist.push(ret);
+    }
+    return rlist;
+
+  }
+  const viewLoan = (e) => {
+    e.preventDefault();
+    utils
+    .get("/viewLoan", {
+      customerId: sessionStorage.getItem("user") 
+    })
+    .then((response) => {
+      console.log(response);
+      let data = formatLoanData(response.data)
+      sessionStorage.setItem("data", JSON.stringify(data));
+      console.log(JSON.parse(sessionStorage.getItem("data")));
+      sessionStorage.setItem("text", "LOANS AWAITING APPROVAL");
+
+      route_("/jsonTable");    })
+    .catch((err) => {
+      console.log(err);
+      window.alert("Request Not processed - Try Again!");
+    });
+
   };
 
   const [branch, setBranch] = useState("Hyderabad");
@@ -108,6 +153,11 @@ const Loan = (props) => {
                     <div className="d-grid gap-2">
                       <button className="btn btn-info" type="submit">
                         Apply
+                      </button>
+                    </div><br/><br/>
+                    <div className="d-grid gap-2">
+                      <button className="btn btn-info" type="button" onClick={viewLoan}>
+                        View applied Loans
                       </button>
                     </div>
                   </form>
