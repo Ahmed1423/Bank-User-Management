@@ -41,6 +41,7 @@ public class CustomerController {
     
     @PostMapping("/applyLoan")
     public String applyLoan(@RequestBody LoanDetails loanDetails){
+    	System.out.println(loanDetails);
         return custService.applyLoan(loanDetails);
     }
 }

@@ -9,6 +9,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "loan_details")
@@ -19,12 +20,14 @@ public class LoanDetails {
 
 	    @ManyToOne
 	    @JoinColumn(name ="customer_number", nullable = false)
-	    @JsonBackReference
+//	    @JsonBackReference
+	    @JsonIgnore
 	    private CustomerMaster customerMaster;
 
 	    @ManyToOne
 	    @JoinColumn(name ="branch_id", nullable = false)
-	    @JsonBackReference
+//	    @JsonBackReference
+	    @JsonIgnore
 	    private BranchMaster branchMaster;
 	    
 	    @Column(name="loan_amount",nullable = false, length = 7)
@@ -33,7 +36,7 @@ public class LoanDetails {
 	    @Column(name="C_ID",nullable = false)
 	    private String customerNumber;
 	    
-	    @Column(name="B_ID",nullable = false, length = 7)
+	    @Column(name="B_ID",nullable = false, length = 20)
 	    private String branchId;
 	    
 	    // getters and setters

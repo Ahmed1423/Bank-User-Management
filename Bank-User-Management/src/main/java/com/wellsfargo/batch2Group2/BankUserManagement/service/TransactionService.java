@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
 import com.wellsfargo.batch2Group2.BankUserManagement.dao.AccountRepository;
+import com.wellsfargo.batch2Group2.BankUserManagement.dao.CustomerRepository;
 import com.wellsfargo.batch2Group2.BankUserManagement.dao.StatementRequest;
 import com.wellsfargo.batch2Group2.BankUserManagement.dao.TransactionRepository;
 import com.wellsfargo.batch2Group2.BankUserManagement.model.AccountMaster;
@@ -33,6 +34,8 @@ public class TransactionService implements ITransactionService {
 	AccountService serv;
 	@Autowired
 	AccountRepository acrepo;
+	@Autowired
+	CustomerService cserv;
 	
 	
 	@Override
@@ -78,8 +81,9 @@ public class TransactionService implements ITransactionService {
 	
 	@Override
 	public String getStatement(StatementRequest sr) throws Exception{
-		List<TransactionDetails> t = 		repo.getStatementfromAccFromToDate(sr.getCustomerId()+"1", sr.getTransactionType() , sr.getFrom(),sr.getTo());
-		//System.out.println(ServiceUtils.convertJava2JSON(t));    
+		List<TransactionDetails> t = 		repo.getStatementfromAccFromToDate(cserv.getAccountNumber(sr.getCustomerId()).get(0), sr.getTransactionType() , sr.getFrom(),sr.getTo());
+		System.out.println(sr.getCustomerId());
+		System.out.println(ServiceUtils.convertJava2JSON(t));    
 		return ServiceUtils.convertJava2JSON(t);//repo.getStatementfromAccFromToDate(sr.getCustomerId()+"1", sr.getTransactionType() , sr.getFrom(),sr.getTo());
 	}
 	
