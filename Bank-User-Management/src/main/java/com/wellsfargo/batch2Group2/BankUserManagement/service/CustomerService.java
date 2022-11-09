@@ -106,8 +106,8 @@ public class CustomerService implements ICustomerService {
     public String viewLoan(String customerId) throws Exception {
     	List<LoanDetails> ld = loanRepo.getloandetails(customerId);
     	return ServiceUtils.convertJava2JSON(ld);
-    	
+
     }
-    
+
     
 }

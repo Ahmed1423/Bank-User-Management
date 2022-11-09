@@ -2,8 +2,22 @@ import React, { useState } from "react";
 import GoToLogin from "./GoToLogin";
 import Menu from "./Menu";
 import * as utils from "../services/requests";
+import { useNavigate } from "react-router-dom";
 
 const Transactions = (props) => {
+  const navigate = useNavigate();
+
+  const route_ = (path) => {
+    navigate(path);
+  };
+
+  const logout = (e) => {
+    e.preventDefault();
+    sessionStorage.removeItem("user");
+    console.log("Loggedout Successfully");
+    route_("/login");
+  };
+
   const [transaction, setTransaction] = useState("Withdraw");
   const [amount, setAmount] = useState(0);
 
@@ -31,8 +45,25 @@ const Transactions = (props) => {
 
   return (
     <>
-      <Menu> </Menu>
-      <div className="container py-4 h-100">
+      <nav className="navbar navbar-expand-lg mx-2">
+        <a
+          className="btn btn-dark mx-auto btn-lg"
+          onClick={() => {
+            route_("/menu");
+          }}
+        >
+          Menu
+        </a>
+        <div>
+          <span className="fw-bold fs-italic p-1">
+            Hi, {sessionStorage.getItem("user")}
+          </span>
+          <a className="btn btn-danger ms-end btn-lg" onClick={logout}>
+            Logout
+          </a>
+        </div>
+      </nav>
+      <div className="container pt-4 h-100">
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col-12 col-md-8 col-lg-6 col-xl-5">
             <div
@@ -40,7 +71,7 @@ const Transactions = (props) => {
               style={{ borderRadius: 2 + "rem" }}
             >
               <div className="card-body p-5 text-center">
-                <div className="mb-md-5 mt-md-4 pb-3">
+                <div className="mb-md-2 mt-md-4 pb-3">
                   <h2 className="fw-bold mb-2 text-uppercase">Transaction</h2>
                   <p className="text-dark-50 mb-5">
                     Please enter the transaction details.

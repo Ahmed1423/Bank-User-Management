@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import GoToLogin from "./GoToLogin";
 import * as constants from "../services/constants";
-import Menu from "./Menu";
 import * as utils from "../services/requests";
 import { useNavigate } from "react-router-dom";
 
@@ -33,44 +32,54 @@ const Loan = (props) => {
         window.alert("Loan Not Submitted");
       });
   };
-  const formatLoanData = (data) =>{
-    console.log(data)
-    let rlist = []
-    let ret = {}
-    for(var i=0;i<data.length;i++){
-      console.log(data[i]['id'])
-      ret['Loan request ID'] = data[i]['id'];
-      ret['Customer ID'] = data[i]['customerNumber'];
-      ret['Customer Name'] = data[i]['customerMaster']['firstName'] + " " +data[i]['customerMaster']['lastName'];
-      ret['Loan Amount'] = data[i]['loanAmount'];
-      ret['Branch ID'] = data[i]['branchId'];
-      ret['Branch Name'] = data[i]['branchMaster']['BranchName'];
-      ret['Branch City'] = data[i]['branchMaster']['branchCity'];
-  
+  const formatLoanData = (data) => {
+    console.log(data);
+    let rlist = [];
+    let ret = {};
+    for (var i = 0; i < data.length; i++) {
+      console.log(data[i]["id"]);
+      ret["Loan request ID"] = data[i]["id"];
+      ret["Customer ID"] = data[i]["customerNumber"];
+      ret["Customer Name"] =
+        data[i]["customerMaster"]["firstName"] +
+        " " +
+        data[i]["customerMaster"]["lastName"];
+      ret["Loan Amount"] = data[i]["loanAmount"];
+      ret["Branch ID"] = data[i]["branchId"];
+      ret["Branch Name"] = data[i]["branchMaster"]["BranchName"];
+      ret["Branch City"] = data[i]["branchMaster"]["branchCity"];
+
       rlist.push(ret);
     }
     return rlist;
+  };
 
-  }
+  let logout = (e) => {
+    e.preventDefault();
+    sessionStorage.removeItem("user");
+    console.log("Loggedout Successfully");
+    route_("/login");
+  };
+
   const viewLoan = (e) => {
     e.preventDefault();
     utils
-    .get("/viewLoan", {
-      customerId: sessionStorage.getItem("user") 
-    })
-    .then((response) => {
-      console.log(response);
-      let data = formatLoanData(response.data)
-      sessionStorage.setItem("data", JSON.stringify(data));
-      console.log(JSON.parse(sessionStorage.getItem("data")));
-      sessionStorage.setItem("text", "LOANS AWAITING APPROVAL");
+      .get("/viewLoan", {
+        customerId: sessionStorage.getItem("user"),
+      })
+      .then((response) => {
+        console.log(response);
+        let data = formatLoanData(response.data);
+        sessionStorage.setItem("data", JSON.stringify(data));
+        console.log(JSON.parse(sessionStorage.getItem("data")));
+        sessionStorage.setItem("text", "LOANS AWAITING APPROVAL");
 
-      route_("/jsonTable");    })
-    .catch((err) => {
-      console.log(err);
-      window.alert("Request Not processed - Try Again!");
-    });
-
+        route_("/jsonTable");
+      })
+      .catch((err) => {
+        console.log(err);
+        window.alert("Request Not processed - Try Again!");
+      });
   };
 
   const [branch, setBranch] = useState("Hyderabad");
@@ -82,16 +91,33 @@ const Loan = (props) => {
 
   return (
     <>
-      <Menu> </Menu>
-      <div className="container py-4 h-100">
+      <nav className="navbar navbar-expand-lg mx-2">
+        <a
+          className="btn btn-dark mx-auto btn-lg"
+          onClick={() => {
+            route_("/menu");
+          }}
+        >
+          Menu
+        </a>
+        <div>
+          <span className="fw-bold fs-italic p-1">
+            Hi, {sessionStorage.getItem("user")}
+          </span>
+          <a className="btn btn-danger ms-end btn-lg" onClick={logout}>
+            Logout
+          </a>
+        </div>
+      </nav>
+      <div className="container pt-4 h-100">
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col-12 col-md-8 col-lg-6 col-xl-5">
             <div
               className="card bg-white text-dark border border-success border-2"
               style={{ borderRadius: 2 + "rem" }}
             >
-              <div className="card-body p-5 text-center">
-                <div className="mb-md-5 mt-md-4 pb-3">
+              <div className="card-body px-5 text-center">
+                <div className="mb-md-1 mt-md-2 pb-3">
                   <h2 className="fw-bold mb-2 text-uppercase">Loan</h2>
                   <p className="text-dark-50 mb-5">
                     Please enter loan details!
@@ -154,9 +180,15 @@ const Loan = (props) => {
                       <button className="btn btn-info" type="submit">
                         Apply
                       </button>
-                    </div><br/><br/>
+                    </div>
+                    <br />
+                    <br />
                     <div className="d-grid gap-2">
-                      <button className="btn btn-info" type="button" onClick={viewLoan}>
+                      <button
+                        className="btn btn-info"
+                        type="button"
+                        onClick={viewLoan}
+                      >
                         View applied Loans
                       </button>
                     </div>

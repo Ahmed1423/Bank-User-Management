@@ -71,14 +71,14 @@ function Register() {
   };
 
   return (
-    <div className="container py-1 h-100">
+    <div className="container pt-1 h-100">
       <div className="row d-flex justify-content-center align-items-center h-100">
         <div className="col-12 col-xl-7">
           <div
             className="card bg-white text-dark border border-success border-2"
             style={{ borderRadius: 2 + "rem" }}
           >
-            <div className="card-body p-5 text-center">
+            <div className="card-body px-5 text-center">
               <div className="mb-md-1 mt-md-1 pb-1">
                 <h2 className="fw-bold text-uppercase">Register</h2>
                 <p className="text-dark-50 mb-3">Please enter your details!</p>
