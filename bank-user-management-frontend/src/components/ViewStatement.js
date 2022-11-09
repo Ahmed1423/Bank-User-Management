@@ -72,7 +72,7 @@ const ViewStatement = (props) => {
         </div>
       </nav>
 
-      <div className="container pt-2 h-100">
+      <div className="container h-100">
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col-12 col-md-8 col-lg-6 col-xl-5">
             <div
@@ -80,11 +80,11 @@ const ViewStatement = (props) => {
               style={{ borderRadius: 2 + "rem" }}
             >
               <div className="card-body px-5 text-center">
-                <div className="mb-md-2 mt-md-3 pb-1">
-                  <h2 className="fw-bold mb-2 text-uppercase">
+                <div className="mb-md-1 mt-md-3 pb-1">
+                  <h2 className="fw-bold mb-1 text-uppercase">
                     Transaction Statement
                   </h2>
-                  <p className="text-dark-50 mb-5">
+                  <p className="text-dark-50 mb-2">
                     Please fill the details to generate the Satement.
                   </p>
                   <form onSubmit={handleSubmit}>

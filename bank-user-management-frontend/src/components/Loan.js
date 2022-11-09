@@ -109,7 +109,7 @@ const Loan = (props) => {
           </a>
         </div>
       </nav>
-      <div className="container pt-4 h-100">
+      <div className="container h-100">
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col-12 col-md-8 col-lg-6 col-xl-5">
             <div
@@ -118,8 +118,8 @@ const Loan = (props) => {
             >
               <div className="card-body px-5 text-center">
                 <div className="mb-md-1 mt-md-2 pb-3">
-                  <h2 className="fw-bold mb-2 text-uppercase">Loan</h2>
-                  <p className="text-dark-50 mb-5">
+                  <h2 className="fw-bold mb-1 text-uppercase">Loan</h2>
+                  <p className="text-dark-50 mb-3">
                     Please enter loan details!
                   </p>
                   <form onSubmit={handleSubmit}>
