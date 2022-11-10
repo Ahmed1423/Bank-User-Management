@@ -169,6 +169,7 @@ function Register() {
                           name="customer-contact"
                           value={phone}
                           onChange={(e) => setPhone(e.target.value)}
+                          pattern="[0-9]{10}"
                           required
                         />
                         <small className="form-text text-muted">
