@@ -57,7 +57,7 @@ function Register() {
           if (response.data === "Successful") {
             sessionStorage.setItem("user", customerNumber);
             window.alert("Account has been created successfully, Please Login");
-            route_("/login");
+            route_("/");
           } else {
             window.alert(response.data);
           }
@@ -265,7 +265,7 @@ function Register() {
 
               <div className="d-grid gap-2">
                 <p className="text-center">Already have an account?</p>
-                <Link to="/login" className="btn btn-success">
+                <Link to="/" className="btn btn-success">
                   Login Here!
                 </Link>
               </div>

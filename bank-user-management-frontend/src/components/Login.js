@@ -15,7 +15,7 @@ function Login() {
   let handleSubmit = (e) => {
     e.preventDefault();
     utils
-      .post("/login", {
+      .post("/", {
         customerId: customerId,
         customerPassword: customerPassword,
       })

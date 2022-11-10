@@ -31,7 +31,7 @@ public class CustomerController {
         return custService.registerAccount(customer);
     }
 
-    @PostMapping("/login")
+    @PostMapping("/")
     public String loginAccount(@RequestBody String details) {
 
     	 String id = details.substring(1, details.length() - 1).split(",")[0].split(":")[1];

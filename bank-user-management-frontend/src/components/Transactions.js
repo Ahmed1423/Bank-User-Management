@@ -15,7 +15,7 @@ const Transactions = (props) => {
     e.preventDefault();
     sessionStorage.removeItem("user");
     console.log("Loggedout Successfully");
-    route_("/login");
+    route_("/");
   };
 
   const [transaction, setTransaction] = useState("Withdraw");

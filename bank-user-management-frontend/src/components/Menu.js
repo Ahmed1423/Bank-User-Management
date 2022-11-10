@@ -17,7 +17,7 @@ const Menu = (props) => {
     e.preventDefault();
     sessionStorage.removeItem("user");
     console.log("Loggedout Successfully");
-    route_("/login");
+    route_("/");
   };
 
   return (
